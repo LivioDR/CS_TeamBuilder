@@ -29,15 +29,28 @@ let agentsInfoForSelection = [] // array to contain the agents of such team
 
 // Adding event listeners to the buttons for the team selection
 // Terrorists
-document.getElementById('terroristBtn').addEventListener('click',async() => {team = 'terrorists';agentsInfoForSelection = await getNameAndPictureByTeam(team);selectAgentScreen()})
+document.getElementById('terroristBtn').addEventListener('click',() => {
+    team = 'terrorists';
+    // agentsInfoForSelection = await getNameAndPictureByTeam(team);
+    selectAgentScreen();
+})
 // Counter-terrorists
-document.getElementById('counterBtn').addEventListener('click',async() => {team = 'counter-terrorists'; agentsInfoForSelection = await getNameAndPictureByTeam(team);selectAgentScreen()})
+document.getElementById('counterBtn').addEventListener('click',() => {
+    team = 'counter-terrorists';
+    // agentsInfoForSelection = await getNameAndPictureByTeam(team);
+    selectAgentScreen();
+})
 // Random team
-document.getElementById('autoTeamBtn').addEventListener('click',async() => {team = Math.random() > 0.5 ? 'counter-terrorists' : 'terrorists'; agentsInfoForSelection = await getNameAndPictureByTeam(team);selectAgentScreen()})
+document.getElementById('autoTeamBtn').addEventListener('click',() => {
+    team = Math.random() > 0.5 ? 'counter-terrorists' : 'terrorists';
+    // agentsInfoForSelection = await getNameAndPictureByTeam(team);
+    selectAgentScreen();
+})
 
 
 // Function to handle the team selection
-const selectAgentScreen = () => {
+const selectAgentScreen = async() => {
+    agentsInfoForSelection = await getNameAndPictureByTeam(team)
     document.getElementById('secondScreen').hidden = true
     document.getElementById('thirdScreen').hidden = false
     assignTeamToHeader()
