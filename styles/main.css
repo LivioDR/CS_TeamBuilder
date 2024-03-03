@@ -1,0 +1,18 @@
+body {
+    background-image: linear-gradient(to right, rgba(0.0, 0.0, 0.0, 0.3),rgba(0.0, 0.0, 0.0, 0.3)), url('../resources/images/backgroundCS16.jpg');
+    background-size: 100vw;
+    background-attachment: fixed;
+}
+button {
+    color: black;
+    font-size: large;
+    width: 100%;
+    height: 3em;
+    margin-top: 3%;
+}
+* {
+    font-family: "Anta", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    color: white;
+}
