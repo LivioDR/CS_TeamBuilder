@@ -41,11 +41,21 @@
         </div>
 
         <!-- Select your agent -->
-        <div id="thirdScreen" hidden style="width: 40%; margin-top: 5%; margin-inline: 30%; background-color: lightgray; border-radius: 5%; aspect-ratio: 1;">
-            <h1 id="chooseAgentH1" style="color: black; text-align: center;">Choose an agent - yourTeam</h1>
+        <div id="thirdScreen" hidden style="width: 40%; margin-top: 3%; margin-inline: 30%; background-color: lightgray; border-radius: 5%; aspect-ratio: 1;">
+            <h1 id="chooseAgentH1" style="color: black; text-align: center; padding-top: 3%; margin-bottom: 0%;">Choose an agent - yourTeam</h1>
             <div id="listOfAgents" style="aspect-ratio: 1;">
                 <!-- List of agents to be populated through the API -->
             </div>
+            <div style="display: flex; flex-direction: row; justify-content: space-between; align-items: center;">
+                <div style="display: flex; flex-direction: row; align-items: center;">
+                    <p style="margin-inline: 5%; width: 50%;">Edit your agent's name: </p>
+                    <input style="color: black; height: 1em;" type="text" id="agentsNameInput">
+                </div>
+                <button id="confirmAgentBtn" style="width: 20%; font-size: small; margin-top: 0%; margin-inline: 5%;">
+                    Continue
+                </button>
+            </div>
+            <p hidden id="charLengthAlert" style="color: red; padding-bottom: 2%; margin-top: 0%; margin-left: 5%;">Your name can have a maximum of 20 characters.</p>
         </div>
         <script type="module" src="./js/script.js"></script>
         <noscript>You need to enable Javascript to view this page</noscript>

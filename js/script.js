@@ -1,5 +1,5 @@
 import { getAgentsByTeam, getNameAndPictureByTeam } from "./services/csgoApiAgents.js";
-import { createAllCards} from "./components/cards.js";
+import { createAllCards, toggleBackground} from "./components/cards.js";
 
 // Audio configuration
 const speakerIcon = document.getElementById('speakerIcon')
@@ -31,24 +31,26 @@ let agentsInfoForSelection = [] // array to contain the agents of such team
 // Terrorists
 document.getElementById('terroristBtn').addEventListener('click',() => {
     team = 'terrorists';
-    // agentsInfoForSelection = await getNameAndPictureByTeam(team);
     selectAgentScreen();
 })
 // Counter-terrorists
 document.getElementById('counterBtn').addEventListener('click',() => {
     team = 'counter-terrorists';
-    // agentsInfoForSelection = await getNameAndPictureByTeam(team);
     selectAgentScreen();
 })
 // Random team
 document.getElementById('autoTeamBtn').addEventListener('click',() => {
     team = Math.random() > 0.5 ? 'counter-terrorists' : 'terrorists';
-    // agentsInfoForSelection = await getNameAndPictureByTeam(team);
     selectAgentScreen();
 })
 
+// Function to add the team's name to the header on the agent selection screen
+const assignTeamToHeader = () => {
+    const chooseAgentH1 = document.getElementById('chooseAgentH1')
+    chooseAgentH1.innerHTML = chooseAgentH1.innerHTML.replace('yourTeam', team.toUpperCase())
+}
 
-// Function to handle the team selection
+// Function to handle the team selection screen
 const selectAgentScreen = async() => {
     agentsInfoForSelection = await getNameAndPictureByTeam(team)
     document.getElementById('secondScreen').hidden = true
@@ -56,10 +58,13 @@ const selectAgentScreen = async() => {
     assignTeamToHeader()
     let clickeableListOfAgents = createAllCards(agentsInfoForSelection)
     document.getElementById('listOfAgents').innerHTML = clickeableListOfAgents
-}
 
-// Function to add the team's name to the header on the agent selection screen
-const assignTeamToHeader = () => {
-    const chooseAgentH1 = document.getElementById('chooseAgentH1')
-    chooseAgentH1.innerHTML = chooseAgentH1.innerHTML.replace('yourTeam', team.toUpperCase())
+    // Adding the change of background color on selection function to each agent's button
+    const idRegex = /^agent-\d{3,6}$/
+    const arrayOfButtons = document.getElementsByTagName('button')
+    for(let i=0; i<arrayOfButtons.length; i++){
+        if(idRegex.test(arrayOfButtons[i].id)){
+            arrayOfButtons[i].addEventListener('click',toggleBackground)
+        }
+    }
 }

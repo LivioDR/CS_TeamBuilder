@@ -41,5 +41,16 @@ const getNameAndPictureByTeam = async(team) => {
     }
 }
 
+const getAgentById = async(id) => {
+    try{
+        let allAgents = await getAllAgentsgents()
+        let filteredResult = allAgents.filter(agent => agent.id == id)
+        return filteredResult
+    }
+    catch(e){
+        return e
+    }
+}
 
-export {getAllAgents, getAgentsByTeam, getNameAndPictureByTeam}
+
+export {getAllAgents, getAgentsByTeam, getNameAndPictureByTeam, getAgentById}
