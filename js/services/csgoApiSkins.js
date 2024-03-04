@@ -1,3 +1,4 @@
+import weaponPricing from "../utilities/weaponPricing.js"
 /* Available languages */
 // bg cs da de el en es-ES es-MX fi fr hu it ja ko nl no pl pt-BR pt-PT ro ru sv th tr uk zh-CN zh-TW vi
 const language = 'en'
@@ -78,45 +79,50 @@ const getSkinByTeamGroupedByCategoryAndWeapon = async(team) => {
 
             let weaponName = filteredResult[i].weapon.name
             let categoryName = filteredResult[i].category.name
+            let weaponRarity = filteredResult[i].rarity.id
 
             if(summarizedDataByWeapon.hasOwnProperty(categoryName)){
                 if(summarizedDataByWeapon[categoryName].hasOwnProperty(weaponName)){
                     summarizedDataByWeapon[categoryName][weaponName].push({
-                        // category: filteredResult[i].category.name,
                         id: filteredResult[i].id,
                         image: filteredResult[i].image,
                         skinName: filteredResult[i].name,
                         team: filteredResult[i].team.id,
-                        // weaponName: filteredResult[i].weapon.name,
-                        rarity: filteredResult[i].rarity.id,    
+                        rarity: filteredResult[i].rarity.id, 
+                        price: categoryName === 'Knives' || categoryName === 'Gloves' ? Math.round((Math.random()*8 + 2))*50 : weaponPricing[categoryName][weaponRarity],   
                     })
+                    if(!summarizedDataByWeapon[categoryName].availableRarities.includes(weaponRarity)){
+                        summarizedDataByWeapon[categoryName].availableRarities.push(weaponRarity)
+                    }
                 }
                 else{
                     summarizedDataByWeapon[categoryName] = {
                         ...summarizedDataByWeapon[categoryName],
                         [weaponName]: [{
-                            // category: filteredResult[i].category.name,
                             id: filteredResult[i].id,
                             image: filteredResult[i].image,
                             skinName: filteredResult[i].name,
                             team: filteredResult[i].team.id,
-                            // weaponName: filteredResult[i].weapon.name,
                             rarity: filteredResult[i].rarity.id,
+                            price: categoryName === 'Knives' || categoryName === 'Gloves' ? Math.round((Math.random()*8 + 2))*50 : weaponPricing[categoryName][weaponRarity],   
                         }]
+                    }
+                    if(!summarizedDataByWeapon[categoryName].availableRarities.includes(weaponRarity)){
+                        summarizedDataByWeapon[categoryName].availableRarities.push(weaponRarity)
                     }
                 }
             }
             else {
                 summarizedDataByWeapon[categoryName] = {
                     [weaponName]: [{
-                        // category: filteredResult[i].category.name,
                         id: filteredResult[i].id,
                         image: filteredResult[i].image,
                         skinName: filteredResult[i].name,
                         team: filteredResult[i].team.id,
-                        // weaponName: filteredResult[i].weapon.name,
                         rarity: filteredResult[i].rarity.id,
-                    }]
+                        price: categoryName === 'Knives' || categoryName === 'Gloves' ? Math.round((Math.random()*8 + 2))*50 : weaponPricing[categoryName][weaponRarity],   
+                    }],
+                    availableRarities: [weaponRarity]
                 }
             }
 
