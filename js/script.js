@@ -2,6 +2,7 @@ import { getNameAndPictureByTeam } from "./services/csgoApiAgents.js";
 import { createAllCards, toggleBackground} from "./components/cards.js";
 import { stringLengthValidation } from "./services/validations.js";
 import { getSkinByTeam, getSkinByTeamGroupedByCategoryAndWeapon } from "./services/csgoApiSkins.js";
+import { getWeponCategoryButtons, getWeaponTypeButtonsByCategory, toggleCategory} from "./components/weaponSelectionButtons.js";
 
 // Declaration of global variables
 let team = '' // string with the team id
@@ -10,6 +11,9 @@ let weaponsForMyTeam = []
 let enemyWeapons = []
 const INITIAL_CASH = 9000   // the money that you have available in the beginning
 let currentCash = INITIAL_CASH
+
+// Clearing the local storage before starting the program
+localStorage.clear()
 
 // Audio configuration
 const speakerIcon = document.getElementById('speakerIcon')
@@ -82,10 +86,34 @@ const selectAgentScreen = async() => {
     
     // Adding the validation for the name input field
     document.getElementById('agentsNameInput').addEventListener('keyup',stringLengthValidation)
-    
-    // Weapons test, to be deleted
+
+}
+
+// Function to handle the weapon selection screen
+const selectWeaponScreen = async() => {
+    // I retrieve all the weapons information for both teams and rearreange it on a custom object
     weaponsForMyTeam = await getSkinByTeamGroupedByCategoryAndWeapon(team)
     enemyWeapons = await getSkinByTeamGroupedByCategoryAndWeapon(team === 'terrorists' ? 'counter-terrorists' : 'terrorists')
     console.log(weaponsForMyTeam)
     console.log(enemyWeapons)
+    
+    // Hiding the third screen and showing the forth screen
+    document.getElementById('thirdScreen').hidden = true
+    document.getElementById('fourthScreen').hidden = false
+
+    // Retrieving the category buttons and adding them to the HTML
+    const categoryButtons = getWeponCategoryButtons(weaponsForMyTeam)
+    document.getElementById('categoryDiv').innerHTML = categoryButtons[1]
+
+    // Adding an event listener to the category buttons
+    const allCategoryButtons = document.getElementsByTagName('button')
+    for(let i=0; i<allCategoryButtons.length; i++){
+        if(allCategoryButtons[i].id.endsWith('-category')){
+            allCategoryButtons[i].addEventListener('click',toggleCategory)
+        }
+    }
+        
 }
+
+// Assignning the function to move from 3->4 screen to the continue button
+document.getElementById('confirmAgentBtn').addEventListener('click',selectWeaponScreen)
