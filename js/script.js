@@ -1,5 +1,6 @@
 import { getAgentsByTeam, getNameAndPictureByTeam } from "./services/csgoApiAgents.js";
 import { createAllCards, toggleBackground} from "./components/cards.js";
+import { stringLengthValidation } from "./services/validations.js";
 
 // Audio configuration
 const speakerIcon = document.getElementById('speakerIcon')
@@ -67,4 +68,7 @@ const selectAgentScreen = async() => {
             arrayOfButtons[i].addEventListener('click',toggleBackground)
         }
     }
+
+    // Adding the validation for the name input field
+    document.getElementById('agentsNameInput').addEventListener('keyup',stringLengthValidation)
 }
