@@ -1,3 +1,5 @@
+import { stringLengthValidation } from "../services/validations.js"
+
 const toggleBackground = () => {
     const arrayOfCards = document.getElementsByTagName('div')
     for(let i=0; i<arrayOfCards.length; i++){
@@ -8,6 +10,8 @@ const toggleBackground = () => {
             }
         }
     }
+    // I run the string validation for the name in case that a default name is not compliant with the set rules
+    stringLengthValidation()
 }
 
 const createCardFromObject = (obj) => {

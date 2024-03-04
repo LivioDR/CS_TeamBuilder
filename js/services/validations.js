@@ -1,20 +1,27 @@
+import errorMessages from "../utilities/errorMessages.js"
+
 const stringLengthValidation = () => {
     const inputField = document.getElementById('agentsNameInput')
-    const alertMessageParagraph = document.getElementById('charLengthAlert')
-    const emptyAlertParagraph = document.getElementById('emptyInputAlert')
+    const alertMessageParagraph = document.getElementById('nameAlert')
     const confirmationButton = document.getElementById('confirmAgentBtn')
 
 
     if(inputField.value.length > 20){
+        alertMessageParagraph.innerText = errorMessages['tooLong']
         alertMessageParagraph.hidden = false
         confirmationButton.disabled = true
     }
     else if(inputField.value.length == 0){
-        emptyAlertParagraph.hidden = false
+        alertMessageParagraph.innerText = errorMessages['noName']
+        alertMessageParagraph.hidden = false
         confirmationButton.disabled = true
     }
+    else if(inputField.value.trim().split(" ").length > 2){
+        alertMessageParagraph.innerText = errorMessages['tooManyWords']
+        alertMessageParagraph.hidden = false
+        confirmationButton.disabled = true    
+    }
     else{
-        emptyAlertParagraph.hidden = true
         alertMessageParagraph.hidden = true
         confirmationButton.disabled = false
     }

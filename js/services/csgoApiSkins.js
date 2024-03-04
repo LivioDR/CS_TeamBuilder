@@ -46,5 +46,86 @@ const getSkinByWeaponName = async(weaponName) => {
     }
 }
 
+const getSkinByTeam = async(team) => {
+    try{
+        let result = await fetch(`${baseUrl}/skins.json`).then(res => res.json())
+        let filteredResult = result.filter(item => item.team.id === team || item.team.id === 'both')
+        let summarizedWeaponData = []
+        for(let i=0; i<filteredResult.length; i++){
+            summarizedWeaponData.push({
+                category: filteredResult[i].category.name,
+                id: filteredResult[i].id,
+                image: filteredResult[i].image,
+                skinName: filteredResult[i].name,
+                team: filteredResult[i].team.id,
+                weaponName: filteredResult[i].weapon.name,
+                rarity: filteredResult[i].rarity.id,
+            })
+        }
+        return summarizedWeaponData
+    }
+    catch(e){
+        return e
+    }
+}
 
-export {getAllSkins, getSkinsByRarity, getSkinImageById, getSkinByWeaponName}
+const getSkinByTeamGroupedByCategoryAndWeapon = async(team) => {
+    try{
+        let result = await fetch(`${baseUrl}/skins.json`).then(res => res.json())
+        let filteredResult = result.filter(item => (item.team.id === team || item.team.id === 'both'))
+        let summarizedDataByWeapon = {}
+        for(let i=0; i<filteredResult.length; i++){
+
+            let weaponName = filteredResult[i].weapon.name
+            let categoryName = filteredResult[i].category.name
+
+            if(summarizedDataByWeapon.hasOwnProperty(categoryName)){
+                if(summarizedDataByWeapon[categoryName].hasOwnProperty(weaponName)){
+                    summarizedDataByWeapon[categoryName][weaponName].push({
+                        // category: filteredResult[i].category.name,
+                        id: filteredResult[i].id,
+                        image: filteredResult[i].image,
+                        skinName: filteredResult[i].name,
+                        team: filteredResult[i].team.id,
+                        // weaponName: filteredResult[i].weapon.name,
+                        rarity: filteredResult[i].rarity.id,    
+                    })
+                }
+                else{
+                    summarizedDataByWeapon[categoryName] = {
+                        ...summarizedDataByWeapon[categoryName],
+                        [weaponName]: [{
+                            // category: filteredResult[i].category.name,
+                            id: filteredResult[i].id,
+                            image: filteredResult[i].image,
+                            skinName: filteredResult[i].name,
+                            team: filteredResult[i].team.id,
+                            // weaponName: filteredResult[i].weapon.name,
+                            rarity: filteredResult[i].rarity.id,
+                        }]
+                    }
+                }
+            }
+            else {
+                summarizedDataByWeapon[categoryName] = {
+                    [weaponName]: [{
+                        // category: filteredResult[i].category.name,
+                        id: filteredResult[i].id,
+                        image: filteredResult[i].image,
+                        skinName: filteredResult[i].name,
+                        team: filteredResult[i].team.id,
+                        // weaponName: filteredResult[i].weapon.name,
+                        rarity: filteredResult[i].rarity.id,
+                    }]
+                }
+            }
+
+        }
+        return summarizedDataByWeapon
+    }
+    catch(e){
+        return e
+    }
+}
+
+export {getAllSkins, getSkinsByRarity, getSkinImageById, getSkinByWeaponName, getSkinByTeam, getSkinByTeamGroupedByCategoryAndWeapon}
