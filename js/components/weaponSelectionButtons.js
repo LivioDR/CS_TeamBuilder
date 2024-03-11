@@ -16,7 +16,6 @@ const toggleCategory = () => {
                 document.getElementById('skinTypeDiv').innerHTML = skinsTypeButtons
 
                 const allSkinButtons = document.getElementsByClassName('skinButton')
-                console.log(allSkinButtons)
                 for(let i=0; i<allSkinButtons.length; i++){
                     allSkinButtons[i].addEventListener('click',agentsPayloadValidation)
                 }
