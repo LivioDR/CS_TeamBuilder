@@ -60,16 +60,21 @@
 
         <!-- Weapon selection screen -->
         <div id="fourthScreen" hidden>
-            <h1 style="text-align: center;">Screen #4 placeholder - Weapon select</h1>
-            <div id="weaponSelectionDiv" style="display: flex; flex-direction: row;">
-                <div id="categoryDiv" style="display: flex; flex-direction: column; width: 20%;">
-                    <!-- To be populated on JS after retrieving the weapons info -->
+            <h1 style="text-align: center;">Select your weapons</h1>
+            <div style="display: flex; flex-direction: column; overflow-y: scroll; justify-content: space-between;">
+                <div id="weaponSelectionDiv" style="display: flex; flex-direction: row; height: 80vh;">
+                    <div id="categoryDiv" style="display: flex; flex-direction: column; width: 20%;">
+                        <!-- To be populated on JS after retrieving the weapons info -->
+                    </div>
+                    <div id="weaponTypeDiv" style="display: flex; flex-direction: column; width: 20%; max-height: 80vh; overflow-y: scroll; margin-inline: 1%;">
+                        <!-- To be populated when clicking on the categories -->
+                    </div>
+                    <div id="skinTypeDiv" style="display: flex; flex-direction: row; flex-wrap: wrap; width: 50%; margin-inline: 3%; max-height: 40vw; overflow-y: scroll;">
+                        <!-- To be populated with the fetched skins data -->
+                    </div>
                 </div>
-                <div id="weaponTypeDiv" style="display: flex; flex-direction: column; width: 20%;">
-                    <!-- To be populated when clicking on the categories -->
-                </div>
-                <div id="skinTypeDiv" style="display: flex; flex-direction: row; flex-wrap: wrap; width: 60%;">
-                    <!-- To be populated with the fetched skins data -->
+                <div style="width: 100%;">
+                    Current equipment placeholder
                 </div>
             </div>
         </div>
