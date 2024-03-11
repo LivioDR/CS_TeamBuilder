@@ -91,6 +91,9 @@ const selectAgentScreen = async() => {
 
 // Function to handle the weapon selection screen
 const selectWeaponScreen = async() => {
+    // I store the custom name of the agent, in case that the user has changed it
+    localStorage.setItem('myAgentCustomName', document.getElementById('agentsNameInput').value)
+
     // I retrieve all the weapons information for both teams and rearreange it on a custom object
     weaponsForMyTeam = await getSkinByTeamGroupedByCategoryAndWeapon(team)
     enemyWeapons = await getSkinByTeamGroupedByCategoryAndWeapon(team === 'terrorists' ? 'counter-terrorists' : 'terrorists')
