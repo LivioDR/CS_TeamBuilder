@@ -27,4 +27,20 @@ const stringLengthValidation = () => {
     }
 }
 
-export {stringLengthValidation}
+const getFullEquipmentFromLocalStorage = () => {
+    let equipment = {}
+    const categories = ['Pistols', 'Rifles', 'Heavy', 'SMGs', 'Knives', 'Gloves']   // hardcoded categories, to be replaced by API fetched ones
+    for(let i=0; i<categories.length; i++){
+        const localStorageString = `selectedSkin-${categories[i]}`
+        equipment[categories[i]] = localStorage.getItem(localStorageString)
+    }
+    return equipment
+}
+
+const agentsPayloadValidation = () => {
+    let fullEquipment = getFullEquipmentFromLocalStorage()
+    console.log(fullEquipment)
+    localStorage.setItem('currentPayload',JSON.stringify(fullEquipment))
+}
+
+export {stringLengthValidation, agentsPayloadValidation}
