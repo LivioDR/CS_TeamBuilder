@@ -1,4 +1,5 @@
 import { agentsPayloadValidation } from "../services/validations.js"
+import { getPayloadCards } from "./payloadDisplay.js"
 
 const toggleCategory = () => {
     const clickedCategory = localStorage.getItem('selectedCategory')
@@ -33,7 +34,6 @@ const getWeponCategoryButtons = (obj) => {
                 ${keys[i]}
             </button>`
     }
-    localStorage.setItem('weaponObject',JSON.stringify(obj))
     return [keys,buttonsHtmlString]
 }
 

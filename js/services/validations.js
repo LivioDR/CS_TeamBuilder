@@ -1,4 +1,5 @@
 import errorMessages from "../utilities/errorMessages.js"
+import { getPayloadCards } from "../components/payloadDisplay.js"
 
 const stringLengthValidation = () => {
     const inputField = document.getElementById('agentsNameInput')
@@ -29,7 +30,9 @@ const stringLengthValidation = () => {
 
 const getFullEquipmentFromLocalStorage = () => {
     let equipment = {}
-    const categories = ['Pistols', 'Rifles', 'Heavy', 'SMGs', 'Knives', 'Gloves']   // hardcoded categories, to be replaced by API fetched ones
+    const weaponsObject = JSON.parse(localStorage.getItem('weaponObject'))
+    const categories = Object.keys(weaponsObject)
+    categories.splice(categories.indexOf('null'),1)
     for(let i=0; i<categories.length; i++){
         const localStorageString = `selectedSkin-${categories[i]}`
         equipment[categories[i]] = localStorage.getItem(localStorageString)
@@ -39,8 +42,9 @@ const getFullEquipmentFromLocalStorage = () => {
 
 const agentsPayloadValidation = () => {
     let fullEquipment = getFullEquipmentFromLocalStorage()
-    console.log(fullEquipment)
     localStorage.setItem('currentPayload',JSON.stringify(fullEquipment))
+    getPayloadCards()
+
 }
 
 export {stringLengthValidation, agentsPayloadValidation}

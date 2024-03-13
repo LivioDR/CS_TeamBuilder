@@ -1,0 +1,52 @@
+const getWeaponInfoById = (category, id, allWeapons) => {
+    console.log(category)
+    for(const [key, val] of Object.entries(allWeapons[category])){
+        const filteredValues = val.filter(skin => skin.id === id)
+        if(filteredValues.length > 0){
+            return filteredValues[0]
+        }
+    }
+    return 'not found'
+}
+
+const getPayloadCards = () => {
+    const currentPayload = JSON.parse(localStorage.getItem('currentPayload'))
+    const weaponObject = JSON.parse(localStorage.getItem('weaponObject'))
+    const categories = Object.keys(currentPayload)
+    let currentBalance = 0
+    
+    let payloadCardsDiv = document.createElement('div')
+    payloadCardsDiv.style.backgroundColor = 'lightgrey'
+    payloadCardsDiv.style.width = '100%'
+    payloadCardsDiv.style.display = 'flex'
+    payloadCardsDiv.style.flexDirection = 'row'
+    payloadCardsDiv.style.flexWrap = 'wrap'
+    payloadCardsDiv.style.justifyContent = 'space-between'
+    payloadCardsDiv.style.marginTop = '10%'
+
+    for(let i=0; i<categories.length; i++){        
+        if(currentPayload[categories[i]] !== null){
+            let image = document.createElement('img')
+            const categoryObject = getWeaponInfoById(categories[i], currentPayload[categories[i]],weaponObject)
+            image.src = categoryObject.image
+            currentBalance += categoryObject.price
+            image.title = `${categoryObject.skinName}\nPrice: $${categoryObject.price}`
+            image.style.width = '40%'
+            payloadCardsDiv.appendChild(image)
+        }
+        else{
+            let image = document.createElement('div')
+            image.style.backgroundColor = 'grey'
+            image.style.width = '40%'
+            payloadCardsDiv.appendChild(image)
+        }
+    }
+    const currentEquipmentDiv = document.getElementById('categoryDiv')
+    if(currentEquipmentDiv.lastChild && currentEquipmentDiv.lastChild.textContent.trim() !== 'Gloves'){
+        currentEquipmentDiv.lastChild.remove()
+    }
+    currentEquipmentDiv.appendChild(payloadCardsDiv)
+    localStorage.setItem('currentBalance',currentBalance)
+}
+
+export {getPayloadCards}

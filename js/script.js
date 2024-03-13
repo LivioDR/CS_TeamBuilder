@@ -67,7 +67,6 @@ const selectAgentScreen = async() => {
     // I retrieve the info of the available agents
     agentsInfoForSelection = await getNameAndPictureByTeam(team)
 
-    
     // Change of screen
     document.getElementById('secondScreen').hidden = true
     document.getElementById('thirdScreen').hidden = false
@@ -97,6 +96,10 @@ const selectWeaponScreen = async() => {
     // I retrieve all the weapons information for both teams and rearreange it on a custom object
     weaponsForMyTeam = await getSkinByTeamGroupedByCategoryAndWeapon(team)
     enemyWeapons = await getSkinByTeamGroupedByCategoryAndWeapon(team === 'terrorists' ? 'counter-terrorists' : 'terrorists')
+    
+    // adding the weapons passed by the object to the local storage
+    localStorage.setItem('weaponObject',JSON.stringify(weaponsForMyTeam))
+    localStorage.setItem('enemyWeaponObject',JSON.stringify(enemyWeapons))
     console.log(weaponsForMyTeam)
     console.log(enemyWeapons)
     
