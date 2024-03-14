@@ -1,8 +1,12 @@
 import { getNameAndPictureByTeam } from "./services/csgoApiAgents.js";
 import { createAllCards, toggleBackground} from "./components/cards.js";
 import { stringLengthValidation } from "./services/validations.js";
-import { getSkinByTeam, getSkinByTeamGroupedByCategoryAndWeapon } from "./services/csgoApiSkins.js";
-import { getWeponCategoryButtons, getWeaponTypeButtonsByCategory, toggleCategory} from "./components/weaponSelectionButtons.js";
+import { getSkinByTeamGroupedByCategoryAndWeapon } from "./services/csgoApiSkins.js";
+import { getWeponCategoryButtons, toggleCategory} from "./components/weaponSelectionButtons.js";
+import { changeBalanceDisplay } from "./components/payloadDisplay.js";
+
+// Clearing the local storage before starting the program
+localStorage.clear()
 
 // Declaration of global variables
 let team = '' // string with the team id
@@ -10,10 +14,7 @@ let agentsInfoForSelection = [] // array to contain the agents of such team
 let weaponsForMyTeam = []
 let enemyWeapons = []
 const INITIAL_CASH = 9000   // the money that you have available in the beginning
-let currentCash = INITIAL_CASH
-
-// Clearing the local storage before starting the program
-localStorage.clear()
+localStorage.setItem('initialCash',INITIAL_CASH)
 
 // Audio configuration
 const speakerIcon = document.getElementById('speakerIcon')
@@ -102,6 +103,9 @@ const selectWeaponScreen = async() => {
     localStorage.setItem('enemyWeaponObject',JSON.stringify(enemyWeapons))
     console.log(weaponsForMyTeam)
     console.log(enemyWeapons)
+
+    // Showing the balance on the upper-right corner of the screen
+    changeBalanceDisplay()
     
     // Hiding the third screen and showing the forth screen
     document.getElementById('thirdScreen').hidden = true

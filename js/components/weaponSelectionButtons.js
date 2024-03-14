@@ -1,5 +1,4 @@
 import { agentsPayloadValidation } from "../services/validations.js"
-import { getPayloadCards } from "./payloadDisplay.js"
 
 const toggleCategory = () => {
     const clickedCategory = localStorage.getItem('selectedCategory')

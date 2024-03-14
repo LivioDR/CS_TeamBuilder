@@ -1,5 +1,17 @@
+import { getAvailableBalance } from "../services/validations.js"
+
+const changeBalanceDisplay = () => {
+    let balance = getAvailableBalance()
+    const balanceH1 = document.getElementById('balanceH1')
+    if(balance < 0){
+        balanceH1.innerHTML = `Balance: <span style="color: red;">$${balance}</span>`
+    }
+    else{
+        balanceH1.innerHTML = `Balance: $${balance}`
+    }
+}
+
 const getWeaponInfoById = (category, id, allWeapons) => {
-    console.log(category)
     for(const [key, val] of Object.entries(allWeapons[category])){
         const filteredValues = val.filter(skin => skin.id === id)
         if(filteredValues.length > 0){
@@ -47,6 +59,9 @@ const getPayloadCards = () => {
     }
     currentEquipmentDiv.appendChild(payloadCardsDiv)
     localStorage.setItem('currentBalance',currentBalance)
+    // I change the balance display every time I select a new weapon
+    changeBalanceDisplay()
+
 }
 
-export {getPayloadCards}
+export {changeBalanceDisplay, getPayloadCards}

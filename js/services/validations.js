@@ -43,8 +43,50 @@ const getFullEquipmentFromLocalStorage = () => {
 const agentsPayloadValidation = () => {
     let fullEquipment = getFullEquipmentFromLocalStorage()
     localStorage.setItem('currentPayload',JSON.stringify(fullEquipment))
+    // I create the equipment cards and add them to the UI to allow the user see their current equipment
     getPayloadCards()
+    // I validate the balance and the number of equipped items to allow the user to move to next screen or not
+    if(balanceValidation() && fullEquipmentValidation()){
+        document.getElementById('confirmEquipBtn').hidden = false
+    }
+    else {
+        document.getElementById('confirmEquipBtn').hidden = true
+    }
 
 }
 
-export {stringLengthValidation, agentsPayloadValidation}
+const getAvailableBalance = () => {
+    const initialCash = localStorage.getItem('initialCash')
+    const currentBalance = (localStorage.getItem('currentBalance')|0)
+    return initialCash - currentBalance
+}
+
+const balanceValidation = () => {
+    let available = getAvailableBalance()
+    if(available < 0){
+        return false
+    }
+    else {
+        return true
+    }
+}
+
+const fullEquipmentValidation = () => {
+    const currentPayload = JSON.parse(localStorage.getItem('currentPayload'))
+    const weaponObject = JSON.parse(localStorage.getItem('weaponObject'))
+    const categories = Object.keys(currentPayload)
+    let itemsEquipped = 0
+    for(let i=0; i<categories.length; i++){        
+        if(currentPayload[categories[i]] !== null){
+            itemsEquipped++
+        }
+    }
+    if(itemsEquipped == 6){
+        return true
+    }
+    else {
+        return false
+    }
+}
+
+export {stringLengthValidation, agentsPayloadValidation, getAvailableBalance, balanceValidation, fullEquipmentValidation}
