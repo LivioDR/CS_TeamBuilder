@@ -8,6 +8,7 @@ const customPortraits = {
     'italian plumber': 'https://kuroganehammer.com/images/smash4/character/character-mario.png',
     'monkey business': 'https://kuroganehammer.com/images/smash4/character/character-donkey_kong.png',
     'fatality': 'https://i.pinimg.com/474x/d0/29/cf/d029cf17be810ba33384948ec4211f2c.jpg',
+    'ohip': 'https://kuroganehammer.com/images/smash4/character/character-dr_mario.png',
 }
 const moneyCheats = {
     'klapaucius': 2,
