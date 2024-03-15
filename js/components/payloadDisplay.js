@@ -64,4 +64,4 @@ const getPayloadCards = () => {
 
 }
 
-export {changeBalanceDisplay, getPayloadCards}
+export {changeBalanceDisplay, getPayloadCards, getWeaponInfoById}

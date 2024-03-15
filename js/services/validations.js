@@ -28,6 +28,37 @@ const stringLengthValidation = () => {
     }
 }
 
+const teamNameValidation = () => {
+    const inputField = document.getElementById('teamNameInput')
+    const confirmButton = document.getElementById('createTeamButton')
+    const alertMessageParagraph = document.getElementById('teamAlert')
+
+    if(inputField.value.length == 0){
+        alertMessageParagraph.innerText = errorMessages['noTeamName']
+        alertMessageParagraph.hidden = false
+        confirmButton.disabled = true
+    }
+    else if(inputField.value.trim().split(" ").length > 1){
+        alertMessageParagraph.innerText = errorMessages['singleWord']
+        alertMessageParagraph.hidden = false
+        confirmButton.disabled = true    
+    }
+    else if(/([^\w]|\d)/i.test(inputField.value.trim())){
+        alertMessageParagraph.innerText = errorMessages['noSymbols']
+        alertMessageParagraph.hidden = false
+        confirmButton.disabled = true
+    } 
+    else if(inputField.value.length > 20){
+        alertMessageParagraph.innerText = errorMessages['teamTooLong']
+        alertMessageParagraph.hidden = false
+        confirmButton.disabled = true    
+    }
+    else {
+        alertMessageParagraph.hidden = true
+        confirmButton.disabled = false
+    }
+}
+
 const getFullEquipmentFromLocalStorage = () => {
     let equipment = {}
     const weaponsObject = JSON.parse(localStorage.getItem('weaponObject'))
@@ -89,4 +120,4 @@ const fullEquipmentValidation = () => {
     }
 }
 
-export {stringLengthValidation, agentsPayloadValidation, getAvailableBalance, balanceValidation, fullEquipmentValidation}
+export {stringLengthValidation, teamNameValidation, agentsPayloadValidation, getAvailableBalance, balanceValidation, fullEquipmentValidation}

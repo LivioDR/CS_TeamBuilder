@@ -18,7 +18,7 @@ const createCardFromObject = (obj) => {
     let formattedName = obj.name.replaceAll("'","´")
     return `<div style="width: 20%; margin: 2%; aspect-ratio: 1; color: black; display: flex; flex-direction: column; justify-content: flex-end;" id='${obj.id}-div'>
     <img src=${obj.image} style="width: 80%; margin-inline: 10%; align-content: center;">
-    <button id=${obj.id} style="font-size: x-small; height: 3em; width: 100%; margin: 0%;" onclick="localStorage.setItem('myCharacterId','${obj.id}');localStorage.setItem('myCharacterName','${formattedName}');document.getElementById('agentsNameInput').value = '${formattedName.substr(0,20)}';">
+    <button id=${obj.id} style="font-size: x-small; height: 3em; width: 100%; margin: 0%;" onclick="localStorage.setItem('myCharacterId','${obj.id}');localStorage.setItem('myCharacterImage','${obj.image}');localStorage.setItem('myCharacterName','${formattedName}');document.getElementById('agentsNameInput').value = '${formattedName.substr(0,20)}';">
     ${obj.name}
     </button>
     </div>`

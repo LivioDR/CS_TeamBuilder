@@ -43,7 +43,7 @@ const getNameAndPictureByTeam = async(team) => {
 
 const getAgentById = async(id) => {
     try{
-        let allAgents = await getAllAgentsgents()
+        let allAgents = await getAllAgents()
         let filteredResult = allAgents.filter(agent => agent.id == id)
         return filteredResult
     }

@@ -61,8 +61,8 @@
         <!-- Weapon selection screen -->
         <div id="fourthScreen" hidden>
             <div style="display: flex; flex-direction: row; justify-content: space-between;">
-                <h1 style="text-align: center; width:80%; padding-left: 15%;">Select your weapons</h1>
-                <h1 id="balanceH1" style="width: 15%;">Balance: </h1>
+                <h1 style="text-align: center; width:70%; padding-left: 20%;">Select your weapons</h1>
+                <h1 id="balanceH1" style="width: 30%;">Balance: </h1>
             </div>
             <div style="display: flex; flex-direction: column; overflow-y: scroll; justify-content: space-between;">
                 <div id="weaponSelectionDiv" style="display: flex; flex-direction: row; height: 80vh;">
@@ -76,10 +76,27 @@
                         <!-- To be populated with the fetched skins data -->
                     </div>
                 </div>
-                <div style="width: 100%;" id="confirmEquipment">
+                <div style="width: 20%; align-self: flex-start;" id="confirmEquipment">
                     <button id="confirmEquipBtn" hidden>Confirm equipment</button>
                 </div>
             </div>
+        </div>
+
+        <!-- Character overview screen -->
+        <div id="fifthScreen" hidden>
+            <div id="agentDisplayDiv">
+                <!-- To be populated with the myAgentDisplay() function -->
+            </div>
+            <div style="display: flex; flex-direction: row; justify-content: space-between; align-items: center; margin-top: 3%;">
+                <div style="width: 30%; margin-left: 10%;">
+                    <label for="teamNameInput">Team Name</label>
+                    <input type="text" id="teamNameInput" style="width: 70%; height: 2em;">
+                </div>
+                <div style="width: 30%; margin-right: 15%;">
+                    <button id="createTeamButton" style="margin-top: 0%;">Create Team</button>
+                </div>
+            </div>
+            <p hidden id="teamAlert" style="color: red; margin-left: 10%;"></p>
         </div>
         <script type="module" src="./js/script.js"></script>
         <noscript>You need to enable Javascript to view this page</noscript>
