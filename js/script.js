@@ -128,9 +128,7 @@ const selectWeaponScreen = async() => {
     }
     else{
         const confirmButton = document.getElementById('confirmAgentBtn')
-        setTimeout(() => {
-            confirmButton.style.backgroundColor = 'lightgreen'
-        }, 100);
+        confirmButton.style.backgroundColor = 'lightgreen'
         setTimeout(() => {
             confirmButton.style.backgroundColor = '#F0F0F0'
         }, 500);
