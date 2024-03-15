@@ -28,13 +28,19 @@ const getPayloadCards = () => {
     let currentBalance = 0
     
     let payloadCardsDiv = document.createElement('div')
-    payloadCardsDiv.style.backgroundColor = 'lightgrey'
-    payloadCardsDiv.style.width = '100%'
-    payloadCardsDiv.style.display = 'flex'
-    payloadCardsDiv.style.flexDirection = 'row'
-    payloadCardsDiv.style.flexWrap = 'wrap'
-    payloadCardsDiv.style.justifyContent = 'space-between'
-    payloadCardsDiv.style.marginTop = '10%'
+    const payloadDivStyle = {
+        'backgroundColor' : 'lightgrey',
+        'width' : '100%',
+        'display' : 'flex',
+        'flexDirection' : 'row',
+        'flexWrap' : 'wrap',
+        'justifyContent' : 'space-between',
+        'marginTop' : '10%',
+
+    }
+    for(const [key, val] of Object.entries(payloadDivStyle)){
+        payloadCardsDiv.style[key] = val
+    }
 
     for(let i=0; i<categories.length; i++){        
         if(currentPayload[categories[i]] !== null){
