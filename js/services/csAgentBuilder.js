@@ -50,12 +50,15 @@ const csAgentsBuilder = async() => {
     let myTeamPayout = []
     let enemyTeamPayout = []
     for(let i=0; i<3; i++){
-        myTeamPayout.push(getAgentEquipmentByTeam(myTeam))
+        myTeamPayout.push({...getAgentEquipmentByTeam(myTeam), name: `${agentsNames.results[i].name.first} ${agentsNames.results[i].name.last}`})
     }
     for(let i=0; i<4; i++){
-        enemyTeamPayout.push(getAgentEquipmentByTeam(enemyTeam))
+        enemyTeamPayout.push({...getAgentEquipmentByTeam(enemyTeam), name: `${agentsNames.results[i+3].name.first} ${agentsNames.results[i+3].name.last}`})
     }
-    return [myTeamPayout, enemyTeamPayout]
+    console.log(myTeamPayout)
+    console.log(enemyTeamPayout)
+
+    // return [myTeamPayout, enemyTeamPayout]
 }
 
 export default csAgentsBuilder
