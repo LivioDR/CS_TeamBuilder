@@ -1,11 +1,36 @@
 import { getUserFullNameAndUsername } from "./usernameApi.js"
 
+const getRandomWeaponByCategory = (weaponsObj, category) => {
+    let availableWeapons = weaponsObj[category]
+    const key = Object.keys(availableWeapons)
+    key.splice(key.indexOf('availableRarities'),1)
+    // I randomize first the weapon that I pick from the category
+    let randomIndex = Math.floor(Math.random() * key.length)
+    let choosedWeapon = weaponsObj[category][key[randomIndex]]
+    // Then I randomize the skin for that weapon
+    randomIndex = Math.floor(Math.random() * choosedWeapon.length)
+    return choosedWeapon[randomIndex]
+}
+
 const getAgentEquipmentByTeam = (team) => {
     const availableWeapons = team === localStorage.getItem('myTeam') ? JSON.parse(localStorage.getItem('weaponObject')) : JSON.parse(localStorage.getItem('enemyWeaponObject'))
-
-    console.log(team)
-    console.log(availableWeapons)
-
+    let payload = {}
+    let canAffordIt = false
+    do{
+        let currentCost = 0
+        for(const [key, val] of Object.entries(availableWeapons)){
+            payload[key] = getRandomWeaponByCategory(availableWeapons,key)
+            currentCost += payload[key].price
+        }
+        if(Number(localStorage.getItem('initialCash')) >= currentCost){
+            canAffordIt = true
+        }
+        else {
+            currentCost = 0
+        }
+    }
+    while(!canAffordIt)
+    return payload
 }
 
 
@@ -30,8 +55,7 @@ const csAgentsBuilder = async() => {
     for(let i=0; i<4; i++){
         enemyTeamPayout.push(getAgentEquipmentByTeam(enemyTeam))
     }
-
-
+    return [myTeamPayout, enemyTeamPayout]
 }
 
 export default csAgentsBuilder

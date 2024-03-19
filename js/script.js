@@ -114,6 +114,9 @@ const selectWeaponScreen = async() => {
         localStorage.setItem('weaponObject',JSON.stringify(weaponsForMyTeam))
         localStorage.setItem('enemyWeaponObject',JSON.stringify(enemyWeapons))
         
+        // TEST ONLY
+        csAgentsBuilder()
+
         // Showing the balance on the upper-right corner of the screen
         changeBalanceDisplay()
         
