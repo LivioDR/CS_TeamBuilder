@@ -22,6 +22,7 @@ const getAgentEquipmentByTeam = (team) => {
             payload[key] = getRandomWeaponByCategory(availableWeapons,key)
             currentCost += payload[key].price
         }
+        // Validation of the cost of the equipment for this team member before returning the result
         if(Number(localStorage.getItem('initialCash')) >= currentCost){
             canAffordIt = true
         }
