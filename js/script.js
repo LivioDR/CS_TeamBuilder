@@ -6,6 +6,7 @@ import { getWeponCategoryButtons, toggleCategory} from "./components/weaponSelec
 import { changeBalanceDisplay } from "./components/payloadDisplay.js";
 import { myAgentDisplay } from "./components/myAgentDisplay.js";
 import isCheatCodeEnabled from "./services/cheatcodes.js";
+import csAgentsBuilder from "./services/csAgentBuilder.js";
 
 // Clearing the local storage before starting the program
 localStorage.clear()
@@ -46,16 +47,22 @@ document.getElementById('startBtn').addEventListener('click', startBuilder)
 // Terrorists
 document.getElementById('terroristBtn').addEventListener('click',() => {
     team = 'terrorists';
+    localStorage.setItem('myTeam',team)
+    localStorage.setItem('enemyTeam', 'counter-terrorists')
     selectAgentScreen();
 })
 // Counter-terrorists
 document.getElementById('counterBtn').addEventListener('click',() => {
     team = 'counter-terrorists';
+    localStorage.setItem('myTeam',team)
+    localStorage.setItem('enemyTeam', 'terrorists')
     selectAgentScreen();
 })
 // Random team
 document.getElementById('autoTeamBtn').addEventListener('click',() => {
     team = Math.random() > 0.5 ? 'counter-terrorists' : 'terrorists';
+    localStorage.setItem('myTeam',team)
+    localStorage.setItem('enemyTeam',team === 'terrorists' ? 'counter-terrorists' : 'terrorists')
     selectAgentScreen();
 })
 
