@@ -1,5 +1,7 @@
+import { getPicturesByTeam } from "./csgoApiAgents.js"
 import { getUserFullNameAndUsername } from "./usernameApi.js"
 
+// This function returns a random weapon from the object passed, based on the category passed as an argument
 const getRandomWeaponByCategory = (weaponsObj, category) => {
     let availableWeapons = weaponsObj[category]
     const key = Object.keys(availableWeapons)
@@ -12,6 +14,7 @@ const getRandomWeaponByCategory = (weaponsObj, category) => {
     return choosedWeapon[randomIndex]
 }
 
+// Function to get the full equipment for an agent, based on the team passed as an argument
 const getAgentEquipmentByTeam = (team) => {
     const availableWeapons = team === localStorage.getItem('myTeam') ? JSON.parse(localStorage.getItem('weaponObject')) : JSON.parse(localStorage.getItem('enemyWeaponObject'))
     let payload = {}
@@ -34,12 +37,90 @@ const getAgentEquipmentByTeam = (team) => {
     return payload
 }
 
+// Function to return a set number of agents images by team
+const getAgentsPicsByTeam = async(team, number) => {
+    let arrayOfPics = await getPicturesByTeam(team)
+    let arrayToReturn = []
+    while(arrayToReturn.length < number){
+        let index = Math.floor(Math.random() * arrayOfPics.length)
+        arrayToReturn.push(arrayOfPics[index])
+        arrayOfPics.splice(index,1)
+    }
+    return arrayToReturn
+}
 
-const csAgentsBuilder = async() => {
-    // Function to create 3 agent cards for my team
-    // and 4 agent cards for the enemy team
-    // To return them in an array of HTMLContent strings
+// Function to create an HTML element based on the name and skins received
+// EDITING HERE
+const getAgentDisplay = (params) => {
+    let divContainer = document.createElement('div')
+    divContainer.id = 'agentDisplayContainer'
     
+    // divContainer styling
+    const divContainerStyle = {
+        'display': 'flex',
+        'flexDirection': 'row',
+        'flexWrap': 'wrap',
+        'justifyContent': 'center',
+        'width': '80%',
+        'marginInline': '10%',
+    }
+    for(const [key, val] of Object.entries(divContainerStyle)){
+        divContainer.style[key] = val
+    }
+    
+    let h1 = document.createElement('h1')
+    h1.textContent = `${params.name}`
+    h1.style.width = '100%'
+    h1.style.textAlign = 'center'
+    divContainer.appendChild(h1)
+    
+    let categories = Object.keys(params)
+    categories.splice(categories.indexOf('null'),1)
+    categories.splice(categories.indexOf('name'),1)
+    categories.splice(categories.indexOf('image'),1)
+    let payloadCardsDiv = document.createElement('div')
+    
+    // payloadCardsDiv styling
+    const payloadCardsStyle = {
+        'display' : 'flex',
+        'flexDirection' : 'row',
+        'flexWrap' : 'wrap',
+        'justifyContent' : 'space-around',
+        'backgroundColor' : 'lightgrey',
+        'width' : '50%',
+    }
+    for(const [key, val] of Object.entries(payloadCardsStyle)){
+        payloadCardsDiv.style[key] = val
+    }
+    
+    
+    for(let i=0; i<categories.length; i++){        
+        let image = document.createElement('img')
+        const categoryObject = params[categories[i]]
+        image.src = categoryObject.image
+        image.title = `Category: ${categories[i]}\nWeapon name: ${categoryObject.skinName.split('|')[0].trim()}\nSkin name: ${categoryObject.skinName.split('|')[1].trim()}\nPrice: $${categoryObject.price}\nRarity: ${categoryObject.rarity.split('_')[1]}`
+        image.style.width = '40%'
+        payloadCardsDiv.appendChild(image)
+    }
+    
+    const agentImage = params.image
+    let avatarImage = document.createElement('img')
+    avatarImage.src = agentImage
+    avatarImage.style.width = '50%'
+    avatarImage.style.height = '50%'
+    avatarImage.style.alignSelf = 'flex-end'
+    avatarImage.style.margin = '0%'
+    
+    divContainer.appendChild(avatarImage)
+    divContainer.appendChild(payloadCardsDiv)
+
+    return divContainer
+}
+
+// Function to create 3 agent cards for my team
+// and 4 agent cards for the enemy team
+// To return them in an array of HTMLContent elements
+const csAgentsBuilder = async() => {
     // Get user names
     let agentsNames = await getUserFullNameAndUsername()
     console.log(agentsNames.results)
@@ -48,16 +129,39 @@ const csAgentsBuilder = async() => {
     const myTeam = localStorage.getItem('myTeam')
     const enemyTeam = localStorage.getItem('enemyTeam')
 
+    // Get avatars
+    const myTeamPics = await getAgentsPicsByTeam(myTeam, 3)
+    const enemyTeamPics = await getAgentsPicsByTeam(enemyTeam, 4)
+
     let myTeamPayout = []
     let enemyTeamPayout = []
     for(let i=0; i<3; i++){
-        myTeamPayout.push({...getAgentEquipmentByTeam(myTeam), name: `${agentsNames.results[i].name.first} ${agentsNames.results[i].name.last}`})
+        myTeamPayout.push({
+            ...getAgentEquipmentByTeam(myTeam), 
+            name: `${agentsNames.results[i].name.first} ${agentsNames.results[i].name.last}`,
+            image: myTeamPics[i],})
     }
     for(let i=0; i<4; i++){
-        enemyTeamPayout.push({...getAgentEquipmentByTeam(enemyTeam), name: `${agentsNames.results[i+3].name.first} ${agentsNames.results[i+3].name.last}`})
+        enemyTeamPayout.push({
+            ...getAgentEquipmentByTeam(enemyTeam), 
+            name: `${agentsNames.results[i+3].name.first} ${agentsNames.results[i+3].name.last}`,
+            image: enemyTeamPics[i],})
     }
     console.log(myTeamPayout)
     console.log(enemyTeamPayout)
+
+    let myTeamHtmlElements = []
+    let enemyTeamHtmlElements = []
+
+    for(let i=0; i<myTeamPayout.length; i++){
+        myTeamHtmlElements.push(getAgentDisplay(myTeamPayout[i]))
+    }
+    for(let i=0; i<enemyTeamPayout.length; i++){
+        enemyTeamHtmlElements.push(getAgentDisplay(enemyTeamPayout[i]))
+    }
+
+    console.log(myTeamHtmlElements)
+    console.log(enemyTeamHtmlElements)
 
     // return [myTeamPayout, enemyTeamPayout]
 }

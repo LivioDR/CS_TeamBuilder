@@ -41,6 +41,20 @@ const getNameAndPictureByTeam = async(team) => {
     }
 }
 
+const getPicturesByTeam = async(team) => {
+    try{
+        let teamAgents = await getAgentsByTeam(team)
+        let pics = []
+        for(let i=0; i<teamAgents.length; i++){
+            pics.push(teamAgents[i].image)
+        }
+        return pics
+    }
+    catch(e){
+        return e
+    }
+}
+
 const getAgentById = async(id) => {
     try{
         let allAgents = await getAllAgents()
@@ -53,4 +67,4 @@ const getAgentById = async(id) => {
 }
 
 
-export {getAllAgents, getAgentsByTeam, getNameAndPictureByTeam, getAgentById}
+export {getAllAgents, getAgentsByTeam, getNameAndPictureByTeam, getPicturesByTeam, getAgentById}
