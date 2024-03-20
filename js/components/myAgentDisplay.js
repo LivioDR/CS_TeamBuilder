@@ -1,6 +1,6 @@
 import { getWeaponInfoById } from "./payloadDisplay.js"
 
-const myAgentDisplay = () => {
+const getMyAgentDisplay = () => {
     let divContainer = document.createElement('div')
     divContainer.id = 'agentDisplayContainer'
     
@@ -16,13 +16,13 @@ const myAgentDisplay = () => {
     for(const [key, val] of Object.entries(divContainerStyle)){
         divContainer.style[key] = val
     }
-
+    
     let h1 = document.createElement('h1')
     h1.textContent = `Your agent's name: ${localStorage.getItem('myAgentCustomName')}`
     h1.style.width = '100%'
     h1.style.textAlign = 'center'
     divContainer.appendChild(h1)
-
+    
     const currentPayload = JSON.parse(localStorage.getItem('currentPayload'))
     const weaponObject = JSON.parse(localStorage.getItem('weaponObject'))
     const categories = Object.keys(currentPayload)
@@ -40,8 +40,8 @@ const myAgentDisplay = () => {
     for(const [key, val] of Object.entries(payloadCardsStyle)){
         payloadCardsDiv.style[key] = val
     }
-
-
+    
+    
     for(let i=0; i<categories.length; i++){        
         let image = document.createElement('img')
         const categoryObject = getWeaponInfoById(categories[i], currentPayload[categories[i]],weaponObject)
@@ -50,7 +50,7 @@ const myAgentDisplay = () => {
         image.style.width = '40%'
         payloadCardsDiv.appendChild(image)
     }
-
+    
     const agentImage = localStorage.getItem('myCharacterImage')
     let avatarImage = document.createElement('img')
     avatarImage.src = agentImage
@@ -58,11 +58,16 @@ const myAgentDisplay = () => {
     avatarImage.style.height = '50%'
     avatarImage.style.alignSelf = 'flex-end'
     avatarImage.style.margin = '0%'
-
+    
     divContainer.appendChild(avatarImage)
     divContainer.appendChild(payloadCardsDiv)
 
+    return divContainer
+}
+
+const myAgentDisplay = () => {
+    const divContainer = getMyAgentDisplay()
     document.getElementById('agentDisplayDiv').appendChild(divContainer)
 }
 
-export {myAgentDisplay}
+export {getMyAgentDisplay, myAgentDisplay}
