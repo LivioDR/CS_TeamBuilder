@@ -69,7 +69,7 @@ document.getElementById('autoTeamBtn').addEventListener('click',() => {
 // Function to add the team's name to the header on the agent selection screen
 const assignTeamToHeader = () => {
     const chooseAgentH1 = document.getElementById('chooseAgentH1')
-    chooseAgentH1.innerHTML = chooseAgentH1.innerHTML.replace('yourTeam', team.toUpperCase())
+    chooseAgentH1.innerHTML = `Choose an agent - ${team.toUpperCase()}`
 }
 
 // Function to handle the team selection screen
