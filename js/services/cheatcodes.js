@@ -20,12 +20,23 @@ const customPortraits = {
     'metal gear': ['https://static.wikia.nocookie.net/fortnite/images/1/1b/Solid_Snake_-_Outfit_-_Fortnite.png', 'Solid Snake'],
     'ripandtear': ['https://static.wikia.nocookie.net/fortnite/images/f/f2/Doom_Slayer_-_Outfit_-_Fortnite.png', 'Doom Slayer'],
     'thelastcrusade': ['https://static.wikia.nocookie.net/fortnite/images/0/06/Indiana_Jones_-_Outfit_-_Fortnite.png', 'Indiana Jones'],
-    'tomb rider': ['https://static.wikia.nocookie.net/fortnite/images/7/71/Lara_Croft_-_Outfit_-_Fortnite.png', 'Lara Croft'],
+    'tomb raider': ['https://static.wikia.nocookie.net/fortnite/images/7/71/Lara_Croft_-_Outfit_-_Fortnite.png', 'Lara Croft'],
 }
 const moneyCheats = {
     'klapaucius': 2,
     'showmethemoney': 10,
     'povertyfinance': 0.5,
+}
+
+const devHelps = {
+    'defaultpayload' : {
+        "selectedSkin-Pistols": "skin-132116",
+        "selectedSkin-Rifles": "skin-590028",
+        "selectedSkin-Heavy": "skin-1638780",
+        "selectedSkin-SMGs": "skin-1245808",
+        "selectedSkin-Knives": "skin-32768152",
+        "selectedSkin-Gloves": "skin-329686228"
+    },
 }
 
 const isCheatCodeEnabled = () => {
@@ -43,6 +54,23 @@ const isCheatCodeEnabled = () => {
         localStorage.setItem('initialCash',currentCash * moneyCheats[enteredName])
         return true
     }
+    if(devHelps.hasOwnProperty(enteredName)){
+        for(const [key, val] of Object.entries(devHelps[enteredName])){
+            localStorage.setItem(key, val)
+        }
+        return true
+    }
+    if(enteredName === 'iwannaplay4real'){
+        let linkToGame = document.createElement('a')
+        linkToGame.href = "https://play-cs.com/en/"
+        linkToGame.target = "_blank"
+        linkToGame.id = 'linkToGame'
+        document.body.appendChild(linkToGame)
+        linkToGame.click()
+        document.body.removeChild(linkToGame)
+        return true
+    }
+
     return false
 }
 
