@@ -206,3 +206,19 @@ const teamOverviewScreen = async() => {
 }
 // Assigning the function to move from 5->6 screen to the create team button
 document.getElementById('createTeamButton').addEventListener('click',teamOverviewScreen)
+
+// Definition of the team display toggle function
+const toggleTeamDisplay = () => {
+    const toggleButton = document.getElementById('toggleTeamDisplayButton')
+    if(toggleButton.innerText.trim() === 'Display enemy team'){
+        document.getElementsByClassName('flip-screen-container')[0].style.transform = 'rotateY(180deg)'
+        toggleButton.innerText = 'Display my team'
+    }
+    else{
+        document.getElementsByClassName('flip-screen-container')[0].style.transform = 'rotateY(0deg)'
+        toggleButton.innerText = 'Display enemy team'
+    }
+}
+
+// Adding the flip-screen function to the display team button
+document.getElementById('toggleTeamDisplayButton').addEventListener('click',toggleTeamDisplay)

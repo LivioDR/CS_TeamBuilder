@@ -52,9 +52,6 @@ input {
     transition: transform 0.8s;
     transform-style: preserve-3d;
 }
-#sixthScreen:hover .flip-screen-container {
-    transform: rotateY(180deg);
-  }
 .front-screen, .back-screen {
 position: absolute;
 width: 100%;
@@ -72,3 +69,9 @@ color: white;
 transform: rotateY(180deg);
 }
 /* End of the adapted tutorial CSS code */
+
+#toggleTeamDisplayButton {
+    width: 30%;
+    margin-inline: 35%;
+    margin-top: 80vh;
+}
