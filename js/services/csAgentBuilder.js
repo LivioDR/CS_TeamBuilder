@@ -52,6 +52,9 @@ const getAgentsPicsByTeam = async(team, number) => {
 // Function to create an HTML element based on the name and skins received
 // EDITING HERE
 const getAgentDisplay = (params) => {
+    console.log('params')
+    console.log(params)
+
     let divContainer = document.createElement('div')
     divContainer.id = 'agentDisplayContainer'
     
@@ -93,12 +96,11 @@ const getAgentDisplay = (params) => {
         payloadCardsDiv.style[key] = val
     }
     
-    
     for(let i=0; i<categories.length; i++){        
         let image = document.createElement('img')
         const categoryObject = params[categories[i]]
         image.src = categoryObject.image
-        image.title = `Category: ${categories[i]}\nWeapon name: ${categoryObject.skinName.split('|')[0].trim()}\nSkin name: ${categoryObject.skinName.split('|')[1].trim()}\nPrice: $${categoryObject.price}\nRarity: ${categoryObject.rarity.split('_')[1]}`
+        image.title = `Category: ${categories[i]}\nWeapon name: ${categoryObject.skinName.includes('|') ? categoryObject.skinName.split('|')[0].trim() : categoryObject.skinName}\nSkin name: ${categoryObject.skinName.includes('|') ? categoryObject.skinName.split('|')[1].trim() : categoryObject.skinName}\nPrice: $${categoryObject.price}\nRarity: ${categoryObject.rarity.split('_')[1]}`
         image.style.width = '40%'
         payloadCardsDiv.appendChild(image)
     }
@@ -123,7 +125,6 @@ const getAgentDisplay = (params) => {
 const csAgentsBuilder = async() => {
     // Get user names
     let agentsNames = await getUserFullNameAndUsername()
-    console.log(agentsNames.results)
     
     // Get user payouts
     const myTeam = localStorage.getItem('myTeam')
@@ -147,8 +148,6 @@ const csAgentsBuilder = async() => {
             name: `${agentsNames.results[i+3].name.first} ${agentsNames.results[i+3].name.last}`,
             image: enemyTeamPics[i],})
     }
-    console.log(myTeamPayout)
-    console.log(enemyTeamPayout)
 
     let myTeamHtmlElements = []
     let enemyTeamHtmlElements = []
@@ -160,10 +159,7 @@ const csAgentsBuilder = async() => {
         enemyTeamHtmlElements.push(getAgentDisplay(enemyTeamPayout[i]))
     }
 
-    console.log(myTeamHtmlElements)
-    console.log(enemyTeamHtmlElements)
-
-    // return [myTeamPayout, enemyTeamPayout]
+    return [myTeamPayout, enemyTeamPayout]
 }
 
 export default csAgentsBuilder
