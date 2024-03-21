@@ -159,7 +159,7 @@ const csAgentsBuilder = async() => {
         enemyTeamHtmlElements.push(getAgentDisplay(enemyTeamPayout[i]))
     }
 
-    return [myTeamPayout, enemyTeamPayout]
+    return [myTeamHtmlElements, enemyTeamHtmlElements]
 }
 
 export default csAgentsBuilder

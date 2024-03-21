@@ -4,7 +4,7 @@ import { stringLengthValidation, teamNameValidation } from "./services/validatio
 import { getSkinByTeamGroupedByCategoryAndWeapon } from "./services/csgoApiSkins.js";
 import { getWeponCategoryButtons, toggleCategory} from "./components/weaponSelectionButtons.js";
 import { changeBalanceDisplay } from "./components/payloadDisplay.js";
-import { myAgentDisplay } from "./components/myAgentDisplay.js";
+import { getMyAgentDisplay, myAgentDisplay } from "./components/myAgentDisplay.js";
 import isCheatCodeEnabled from "./services/cheatcodes.js";
 import csAgentsBuilder from "./services/csAgentBuilder.js";
 
@@ -167,3 +167,36 @@ const characterOverviewScreen = () => {
 }
 // Assigning the function to move from 4->5 screen to the confirm button
 document.getElementById('confirmEquipBtn').addEventListener('click',characterOverviewScreen)
+
+const teamOverviewScreen = async() => {
+    // Get the team name from the input
+    const teamName = document.getElementById('teamNameInput').value.trim()
+    // Showing the team name on the h1 element of the screen
+    document.getElementById('teamName').innerHTML = teamName
+
+    // Get the HTML elements for my agent, my team, and the enemies
+    const myAgent = getMyAgentDisplay()
+    const [myTeammates, enemyTeam] = await csAgentsBuilder()
+
+    console.log(myTeammates)
+    console.log(enemyTeam)
+
+    // Adding these elements to the screen to show
+    const teamDisplayContainer = document.getElementById('teamDisplay')
+    teamDisplayContainer.appendChild(myAgent)
+    teamDisplayContainer.append(...myTeammates)
+
+    // Giving specific styling to these containers
+    let myTeamContainersArray = document.querySelectorAll("#teamDisplay div")
+    for(const div of myTeamContainersArray){
+        div.style.width = '40%'
+        div.style.height = '40%'
+    }
+
+    // Hiding the fifth screen and showing the sixth screen
+    document.getElementById('fifthScreen').hidden = true
+    document.getElementById('sixthScreen').hidden = false
+    
+}
+// Assigning the function to move from 5->6 screen to the create team button
+document.getElementById('createTeamButton').addEventListener('click',teamOverviewScreen)
