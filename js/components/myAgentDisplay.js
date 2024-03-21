@@ -18,7 +18,7 @@ const getMyAgentDisplay = () => {
     }
     
     let h1 = document.createElement('h1')
-    h1.textContent = `Your agent's name: ${localStorage.getItem('myAgentCustomName')}`
+    h1.textContent = `${localStorage.getItem('myAgentCustomName')}`
     h1.style.width = '100%'
     h1.style.textAlign = 'center'
     divContainer.appendChild(h1)
