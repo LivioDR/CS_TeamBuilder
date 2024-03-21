@@ -52,8 +52,6 @@ const getAgentsPicsByTeam = async(team, number) => {
 // Function to create an HTML element based on the name and skins received
 // EDITING HERE
 const getAgentDisplay = (params) => {
-    console.log('params')
-    console.log(params)
 
     let divContainer = document.createElement('div')
     divContainer.id = 'agentDisplayContainer'
