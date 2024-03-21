@@ -101,9 +101,19 @@
 
         <!-- Team overview screen -->
         <div id="sixthScreen" hidden>
-            <h1 id="teamName"></h1>
-            <div id="teamDisplay" style="display: flex; flex-direction: row; flex-wrap: wrap;">
-                <!-- Team members and equipment to be populated on JS -->
+            <div class="flip-screen-container">
+                <div class="front-screen">
+                    <h1 id="teamName" style="text-align: center;"></h1>
+                    <div id="teamDisplay">
+                        <!-- Team members and equipment to be populated on JS -->
+                    </div>
+                </div>
+                <div class="back-screen">
+                    <h1 id="enemyTeamName" style="text-align: center;">Enemy Team</h1>
+                    <div id="enemyTeamDisplay">
+                        <!-- Enemy team members and equipment to be populated on JS -->
+                    </div>
+                </div>
             </div>
         </div>
         <script type="module" src="./js/script.js"></script>

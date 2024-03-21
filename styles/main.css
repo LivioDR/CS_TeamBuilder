@@ -20,3 +20,55 @@ button {
 input {
     color: black;
 }
+#fifthScreen > #agentDisplayDiv > #agentDisplayContainer > img {
+    width: 50%;
+}
+#teamDisplay, #enemyTeamDisplay {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    width: 80%;
+    margin-inline: 10%;
+    background-color: rgba(150, 255, 150, 0.3);
+    padding-bottom: 2%;
+    border-radius: 20px;
+}
+#enemyTeamDisplay {
+    background-color: rgba(255, 150, 150, 0.3);
+}
+
+/* The following CSS code was based on the W3Schools tutorial to create a flip card */
+/* https://www.w3schools.com/howto/howto_css_flip_card.asp */
+#sixthScreen {
+        background-color: transparent;
+        perspective: 1000px;
+}
+.flip-screen-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+}
+#sixthScreen:hover .flip-screen-container {
+    transform: rotateY(180deg);
+  }
+.front-screen, .back-screen {
+position: absolute;
+width: 100%;
+height: 100%;
+-webkit-backface-visibility: hidden; /* Safari */
+backface-visibility: hidden;
+}
+.front-screen {
+background-color: #bbb;
+color: black;
+}
+.back-screen {
+background-color: dodgerblue;
+color: white;
+transform: rotateY(180deg);
+}
+/* End of the adapted tutorial CSS code */

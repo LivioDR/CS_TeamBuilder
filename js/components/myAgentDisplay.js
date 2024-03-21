@@ -54,8 +54,7 @@ const getMyAgentDisplay = () => {
     const agentImage = localStorage.getItem('myCharacterImage')
     let avatarImage = document.createElement('img')
     avatarImage.src = agentImage
-    avatarImage.style.width = '50%'
-    avatarImage.style.height = '50%'
+    avatarImage.style.maxWidth = '50%'
     avatarImage.style.alignSelf = 'flex-end'
     avatarImage.style.margin = '0%'
     

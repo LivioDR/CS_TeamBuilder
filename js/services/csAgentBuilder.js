@@ -50,7 +50,6 @@ const getAgentsPicsByTeam = async(team, number) => {
 }
 
 // Function to create an HTML element based on the name and skins received
-// EDITING HERE
 const getAgentDisplay = (params) => {
 
     let divContainer = document.createElement('div')
@@ -63,7 +62,7 @@ const getAgentDisplay = (params) => {
         'flexWrap': 'wrap',
         'justifyContent': 'center',
         'width': '80%',
-        'marginInline': '10%',
+        'alignItems': 'flex-end',
     }
     for(const [key, val] of Object.entries(divContainerStyle)){
         divContainer.style[key] = val
@@ -106,8 +105,7 @@ const getAgentDisplay = (params) => {
     const agentImage = params.image
     let avatarImage = document.createElement('img')
     avatarImage.src = agentImage
-    avatarImage.style.width = '50%'
-    avatarImage.style.height = '50%'
+    avatarImage.style.maxWidth = '50%'
     avatarImage.style.alignSelf = 'flex-end'
     avatarImage.style.margin = '0%'
     

@@ -69,7 +69,7 @@ document.getElementById('autoTeamBtn').addEventListener('click',() => {
 // Function to add the team's name to the header on the agent selection screen
 const assignTeamToHeader = () => {
     const chooseAgentH1 = document.getElementById('chooseAgentH1')
-    chooseAgentH1.innerHTML = `Choose an agent - ${team.toUpperCase()}`
+    chooseAgentH1.innerHTML = `Choose an agent<br>${team.toUpperCase()}`
 }
 
 // Function to handle the team selection screen
@@ -114,9 +114,6 @@ const selectWeaponScreen = async() => {
         localStorage.setItem('weaponObject',JSON.stringify(weaponsForMyTeam))
         localStorage.setItem('enemyWeaponObject',JSON.stringify(enemyWeapons))
         
-        // TEST ONLY
-        csAgentsBuilder()
-
         // Showing the balance on the upper-right corner of the screen
         changeBalanceDisplay()
         
@@ -183,8 +180,13 @@ const teamOverviewScreen = async() => {
 
     // Adding these elements to the screen to show
     const teamDisplayContainer = document.getElementById('teamDisplay')
+    myAgent.style.marginInline = '0%' // changing this value to adjust the display to the new screen
+    myAgent.style.alignItems = 'flex-end'
     teamDisplayContainer.appendChild(myAgent)
     teamDisplayContainer.append(...myTeammates)
+
+    const enemyTeamDisplayContainer = document.getElementById('enemyTeamDisplay')
+    enemyTeamDisplayContainer.append(...enemyTeam)
 
     // Giving specific styling to these containers
     let myTeamContainersArray = document.querySelectorAll("#teamDisplay div")
@@ -192,7 +194,11 @@ const teamOverviewScreen = async() => {
         div.style.width = '40%'
         div.style.height = '40%'
     }
-
+    let enemyTeamContainersArray = document.querySelectorAll("#enemyTeamDisplay div")
+    for(const div of enemyTeamContainersArray){
+        div.style.width = '40%'
+        div.style.height = '40%'
+    }
     // Hiding the fifth screen and showing the sixth screen
     document.getElementById('fifthScreen').hidden = true
     document.getElementById('sixthScreen').hidden = false
