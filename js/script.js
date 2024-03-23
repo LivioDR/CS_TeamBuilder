@@ -175,9 +175,6 @@ const teamOverviewScreen = async() => {
     const myAgent = getMyAgentDisplay()
     const [myTeammates, enemyTeam] = await csAgentsBuilder()
 
-    console.log(myTeammates)
-    console.log(enemyTeam)
-
     // Adding these elements to the screen to show
     const teamDisplayContainer = document.getElementById('teamDisplay')
     myAgent.style.marginInline = '0%' // changing this value to adjust the display to the new screen
