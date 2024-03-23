@@ -57,6 +57,7 @@ const getMyAgentDisplay = () => {
     avatarImage.style.maxWidth = '50%'
     avatarImage.style.alignSelf = 'flex-end'
     avatarImage.style.margin = '0%'
+    avatarImage.style.maskImage = "linear-gradient(to bottom, black 90%,transparent 95%)"
     
     divContainer.appendChild(avatarImage)
     divContainer.appendChild(payloadCardsDiv)
