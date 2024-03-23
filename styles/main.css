@@ -1,5 +1,5 @@
 body {
-    background-image: linear-gradient(to right, rgba(0.0, 0.0, 0.0, 0.3),rgba(0.0, 0.0, 0.0, 0.3)), url('../resources/images/backgroundCS16.jpg');
+    background-image: linear-gradient(to right, rgba(0.0, 0.0, 0.0, 0.3),rgba(0.0, 0.0, 0.0, 0.3)), url('../assets/images/backgroundCS16.jpg');
     background-size: 100vw;
     background-attachment: fixed;
 }
@@ -20,6 +20,15 @@ button {
 input {
     color: black;
 }
+/* Hidding the scrollbars in the weapon selection screens */
+#skinTypeDiv, #weaponTypeDiv, #categoryDiv {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+#skinTypeDiv::-webkit-scrollbar, #weaponTypeDiv::-webkit-scrollbar, #categoryDiv::-webkit-scrollbar { /* Safari, Opera and Chrome */
+    display: none;
+  }
+
 #fifthScreen > #agentDisplayDiv > #agentDisplayContainer > img {
     width: 50%;
 }
