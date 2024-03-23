@@ -103,21 +103,28 @@
         <div id="sixthScreen" hidden>
             <div class="flip-screen-container">
                 <div class="front-screen">
-                    <h1 id="teamName" style="text-align: center;"></h1>
+                    <div class="teamsHeaderContainer">
+                        <h1 id="teamName" style="text-align: center;"></h1>
+                        <button id="toggleTeamDisplayButton">
+                            Display enemy team
+                        </button>
+                    </div>
                     <div id="teamDisplay">
                         <!-- Team members and equipment to be populated on JS -->
                     </div>
                 </div>
                 <div class="back-screen">
-                    <h1 id="enemyTeamName" style="text-align: center;">Enemy Team</h1>
+                    <div class="teamsHeaderContainer">
+                        <h1 id="enemyTeamName" style="text-align: center;">Enemy Team</h1>
+                        <button id="toggleEnemyTeamDisplayButton">
+                            Display my team
+                        </button>
+                    </div>
                     <div id="enemyTeamDisplay">
                         <!-- Enemy team members and equipment to be populated on JS -->
                     </div>
                 </div>
             </div>
-            <button id="toggleTeamDisplayButton">
-                Display enemy team
-            </button>
         </div>
         <script type="module" src="./js/script.js"></script>
         <noscript>You need to enable Javascript to view this page</noscript>

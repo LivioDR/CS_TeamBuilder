@@ -79,8 +79,9 @@ transform: rotateY(180deg);
 }
 /* End of the adapted tutorial CSS code */
 
-#toggleTeamDisplayButton {
+#toggleTeamDisplayButton, #toggleEnemyTeamDisplayButton {
     width: 30%;
     margin-inline: 35%;
-    margin-top: 80vh;
+    margin-top: 0%;
+    margin-bottom: 2%;
 }
