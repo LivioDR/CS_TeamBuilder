@@ -8,7 +8,6 @@ const customPortraits = {
     'bounty hunter': ['https://kuroganehammer.com/images/smash4/character/character-samus.png', 'Samus Aran'],
     'italian plumber': ['https://kuroganehammer.com/images/smash4/character/character-mario.png', 'Mario'],
     'monkey business': ['https://kuroganehammer.com/images/smash4/character/character-donkey_kong.png','Donkey Kong'],
-    'fatality': ['https://i.pinimg.com/474x/d0/29/cf/d029cf17be810ba33384948ec4211f2c.jpg','Scorpion'],
     'ohip': ['https://kuroganehammer.com/images/smash4/character/character-dr_mario.png','Dr. Mario'],
     // Fortnite skins - https://fortnite.fandom.com/wiki/Outfits
     'dark force': ['https://static.wikia.nocookie.net/fortnite/images/9/95/Darth_Vader_-_Outfit_-_Fortnite.png','Darth Vader'],
