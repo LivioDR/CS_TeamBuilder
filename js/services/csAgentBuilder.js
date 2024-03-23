@@ -68,7 +68,7 @@ const getAgentDisplay = (params) => {
         'display': 'flex',
         'flexDirection': 'row',
         'flexWrap': 'wrap',
-        'justifyContent': 'center',
+        'justifyContent': 'space-between',
         'width': '80%',
         'alignItems': 'center',
     }
