@@ -12,6 +12,7 @@ const getMyAgentDisplay = () => {
         'justifyContent': 'center',
         'width': '80%',
         'marginInline': '10%',
+        'alignItems': 'center',
     }
     for(const [key, val] of Object.entries(divContainerStyle)){
         divContainer.style[key] = val
@@ -58,7 +59,9 @@ const getMyAgentDisplay = () => {
     avatarImage.style.alignSelf = 'flex-end'
     avatarImage.style.margin = '0%'
     avatarImage.style.maskImage = "linear-gradient(to bottom, black 90%,transparent 95%)"
-    
+    avatarImage.style.objectFit = 'scale-down'
+    avatarImage.style.aspectRatio = '4/3'
+
     divContainer.appendChild(avatarImage)
     divContainer.appendChild(payloadCardsDiv)
 

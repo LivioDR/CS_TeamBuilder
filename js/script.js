@@ -178,7 +178,6 @@ const teamOverviewScreen = async() => {
     // Adding these elements to the screen to show
     const teamDisplayContainer = document.getElementById('teamDisplay')
     myAgent.style.marginInline = '0%' // changing this value to adjust the display to the new screen
-    myAgent.style.alignItems = 'flex-end'
     teamDisplayContainer.appendChild(myAgent)
     teamDisplayContainer.append(...myTeammates)
 

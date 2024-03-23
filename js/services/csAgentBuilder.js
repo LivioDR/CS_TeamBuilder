@@ -70,7 +70,7 @@ const getAgentDisplay = (params) => {
         'flexWrap': 'wrap',
         'justifyContent': 'center',
         'width': '80%',
-        'alignItems': 'flex-end',
+        'alignItems': 'center',
     }
     for(const [key, val] of Object.entries(divContainerStyle)){
         divContainer.style[key] = val
