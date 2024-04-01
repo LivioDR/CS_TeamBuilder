@@ -20,6 +20,7 @@ button {
 input {
     color: black;
 }
+/* FOURTH SCREEN STYLING */
 #fourthScreenWeaponContainer {
     display: flex;
     flex-direction: column;
@@ -44,6 +45,7 @@ input {
     overflow-y: scroll; 
     margin-inline: 1%;
 }
+/* END OF FOURTH SCREEN STYLING */
 
 /* Hidding the scrollbars in the weapon selection screens */
 #skinTypeDiv, #weaponTypeDiv, #categoryDiv, #fourthScreenWeaponContainer {
