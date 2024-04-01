@@ -20,6 +20,31 @@ button {
 input {
     color: black;
 }
+#fourthScreenWeaponContainer {
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+    justify-content: space-between;
+ }
+#weaponSelectionDiv {
+    display: flex;
+    flex-direction: row;
+    height: 80vh;
+}
+#categoryDiv {
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+}
+#weaponTypeDiv {
+    display: flex; 
+    flex-direction: column; 
+    width: 20%; 
+    max-height: 70vh; 
+    overflow-y: scroll; 
+    margin-inline: 1%;
+}
+
 /* Hidding the scrollbars in the weapon selection screens */
 #skinTypeDiv, #weaponTypeDiv, #categoryDiv, #fourthScreenWeaponContainer {
     -ms-overflow-style: none;  /* IE and Edge */
