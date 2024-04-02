@@ -19,7 +19,7 @@ const getMyAgentDisplay = () => {
     }
     
     let h1 = document.createElement('h1')
-    h1.textContent = `${localStorage.getItem('myAgentCustomName')}`
+    h1.innerHTML = `${localStorage.getItem('myAgentCustomName')} <span style="font-size:0.5em;">(Balance: $${Number(localStorage.getItem('initialCash')) - Number(localStorage.getItem('currentBalance'))})</span>`
     h1.style.width = '100%'
     h1.style.textAlign = 'center'
     divContainer.appendChild(h1)

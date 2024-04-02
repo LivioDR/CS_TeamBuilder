@@ -77,7 +77,7 @@ const getAgentDisplay = (params) => {
     }
     
     let h1 = document.createElement('h1')
-    h1.textContent = `${params.name}`
+    // h1.textContent = `${params.name}` // moved to the back to add the remaining balance to the h1 element
     h1.style.width = '100%'
     h1.style.textAlign = 'center'
     divContainer.appendChild(h1)
@@ -100,6 +100,8 @@ const getAgentDisplay = (params) => {
     for(const [key, val] of Object.entries(payloadCardsStyle)){
         payloadCardsDiv.style[key] = val
     }
+
+    let spentAmount = 0
     
     for(let i=0; i<categories.length; i++){        
         let image = document.createElement('img')
@@ -108,7 +110,11 @@ const getAgentDisplay = (params) => {
         image.title = `Category: ${categories[i]}\nWeapon name: ${categoryObject.skinName.includes('|') ? categoryObject.skinName.split('|')[0].trim() : categoryObject.skinName}\nSkin name: ${categoryObject.skinName.includes('|') ? categoryObject.skinName.split('|')[1].trim() : categoryObject.skinName}\nPrice: $${categoryObject.price}\nRarity: ${categoryObject.rarity.split('_')[1]}`
         image.style.width = '40%'
         payloadCardsDiv.appendChild(image)
+        spentAmount += categoryObject.price
     }
+
+    // Adding the agent's name and remaining balance
+    h1.innerHTML = `${params.name} <span style="font-size:0.5em;">(Balance: $${Number(localStorage.getItem('initialCash')) - spentAmount})</span>`
     
     const agentImage = params.image
     let avatarImage = document.createElement('img')
