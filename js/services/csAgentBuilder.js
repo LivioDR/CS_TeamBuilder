@@ -77,10 +77,11 @@ const getAgentDisplay = (params) => {
     }
     
     let h1 = document.createElement('h1')
-    // h1.textContent = `${params.name}` // moved to the back to add the remaining balance to the h1 element
-    h1.style.width = '100%'
+    h1.textContent = `${params.name}`
+    h1.style.width = '70%'
     h1.style.textAlign = 'center'
     divContainer.appendChild(h1)
+
     
     let categories = Object.keys(params)
     categories.splice(categories.indexOf('null'),1)
@@ -100,7 +101,7 @@ const getAgentDisplay = (params) => {
     for(const [key, val] of Object.entries(payloadCardsStyle)){
         payloadCardsDiv.style[key] = val
     }
-
+    
     let spentAmount = 0
     
     for(let i=0; i<categories.length; i++){        
@@ -112,9 +113,12 @@ const getAgentDisplay = (params) => {
         payloadCardsDiv.appendChild(image)
         spentAmount += categoryObject.price
     }
-
-    // Adding the agent's name and remaining balance
-    h1.innerHTML = `${params.name} <span style="font-size:0.5em;">(Balance: $${Number(localStorage.getItem('initialCash')) - spentAmount})</span>`
+    
+    // Adding the agent's remaining balance
+    let balanceSpan = document.createElement('div')
+    balanceSpan.innerText = `(Balance: $${Number(localStorage.getItem('initialCash')) - spentAmount})`
+    balanceSpan.className = 'balanceDiv'
+    divContainer.appendChild(balanceSpan)
     
     const agentImage = params.image
     let avatarImage = document.createElement('img')

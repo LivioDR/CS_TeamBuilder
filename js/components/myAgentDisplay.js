@@ -19,10 +19,15 @@ const getMyAgentDisplay = () => {
     }
     
     let h1 = document.createElement('h1')
-    h1.innerHTML = `${localStorage.getItem('myAgentCustomName')} <span style="font-size:0.5em;">(Balance: $${Number(localStorage.getItem('initialCash')) - Number(localStorage.getItem('currentBalance'))})</span>`
-    h1.style.width = '100%'
+    h1.innerHTML = `${localStorage.getItem('myAgentCustomName')}`
+    h1.style.width = '70%'
     h1.style.textAlign = 'center'
     divContainer.appendChild(h1)
+
+    let balanceSpan = document.createElement('div')
+    balanceSpan.innerText = `(Balance: $${Number(localStorage.getItem('initialCash')) - Number(localStorage.getItem('currentBalance'))})`
+    balanceSpan.className = 'balanceDiv'
+    divContainer.appendChild(balanceSpan)
     
     const currentPayload = JSON.parse(localStorage.getItem('currentPayload'))
     const weaponObject = JSON.parse(localStorage.getItem('weaponObject'))

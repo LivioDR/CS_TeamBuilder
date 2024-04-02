@@ -154,6 +154,10 @@ const characterOverviewScreen = () => {
     // I assign a default name to the team to start with
     document.getElementById('teamNameInput').value = 'DefaultTeamName'
 
+    // Setting the styles for the balance display
+    const balance = document.querySelector('#fifthScreen .balanceDiv')
+    balance.style.fontSize = '1.5em'
+
     // Hiding the fourth screen and showing the fifth screen
     document.getElementById('fourthScreen').hidden = true
     document.getElementById('fifthScreen').hidden = false
@@ -194,6 +198,11 @@ const teamOverviewScreen = async() => {
     for(const div of enemyTeamContainersArray){
         div.style.width = '40%'
         div.style.height = '40%'
+    }
+    let balanceDivs = document.querySelectorAll('.balanceDiv')
+    for(const div of balanceDivs){
+        div.style.width = '30%'
+        div.style.fontSize = '0.8em'
     }
     // Hiding the fifth screen and showing the sixth screen
     document.getElementById('fifthScreen').hidden = true
