@@ -1,6 +1,21 @@
 import errorMessages from "../utilities/errorMessages.js"
 import { getPayloadCards } from "../components/payloadDisplay.js"
 
+const agentSelectedValidation = () => {
+    const agentId = localStorage.getItem('myCharacterId')
+    const alertMessageParagraph = document.getElementById('nameAlert')
+
+    if(agentId != undefined){
+        alertMessageParagraph.hidden = true
+        return true
+    }
+    else{
+        alertMessageParagraph.innerText = errorMessages['noAgent']
+        alertMessageParagraph.hidden = false
+        return false
+    }
+}
+
 const stringLengthValidation = () => {
     const inputField = document.getElementById('agentsNameInput')
     const alertMessageParagraph = document.getElementById('nameAlert')
@@ -120,4 +135,4 @@ const fullEquipmentValidation = () => {
     }
 }
 
-export {stringLengthValidation, teamNameValidation, agentsPayloadValidation, getAvailableBalance, balanceValidation, fullEquipmentValidation}
+export {agentSelectedValidation, stringLengthValidation, teamNameValidation, agentsPayloadValidation, getAvailableBalance, balanceValidation, fullEquipmentValidation}
