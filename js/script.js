@@ -1,6 +1,6 @@
 import { getNameAndPictureByTeam } from "./services/csgoApiAgents.js";
 import { createAllCards, toggleBackground} from "./components/cards.js";
-import { stringLengthValidation, teamNameValidation } from "./services/validations.js";
+import { agentSelectedValidation, stringLengthValidation, teamNameValidation } from "./services/validations.js";
 import { getSkinByTeamGroupedByCategoryAndWeapon } from "./services/csgoApiSkins.js";
 import { getWeponCategoryButtons, toggleCategory} from "./components/weaponSelectionButtons.js";
 import { changeBalanceDisplay } from "./components/payloadDisplay.js";
@@ -103,8 +103,11 @@ const selectWeaponScreen = async() => {
     // I store the custom name of the agent, in case that the user has changed it
     localStorage.setItem('myAgentCustomName', document.getElementById('agentsNameInput').value.trim())
     
+    // Calling the string validation in case that the user doesn't pick any agent and tries to move forward
+    stringLengthValidation()
+    
     // I check for any cheat codes that the user may have entered. If the user enters a cheatcode I activate it, but don't move to the next screen to allow the user enter an actual agent name. If the entered name does not match a cheat code, I execute the rest of the script
-    if(!isCheatCodeEnabled()){
+    if(!isCheatCodeEnabled() && agentSelectedValidation()){
 
         // I retrieve all the weapons information for both teams and rearreange it on custom objects
         weaponsForMyTeam = await getSkinByTeamGroupedByCategoryAndWeapon(team)
@@ -133,7 +136,7 @@ const selectWeaponScreen = async() => {
             }
         }
     }
-    else{
+    else if(isCheatCodeEnabled()){
         const confirmButton = document.getElementById('confirmAgentBtn')
         confirmButton.style.backgroundColor = 'lightgreen'
         setTimeout(() => {
