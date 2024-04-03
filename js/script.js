@@ -7,6 +7,7 @@ import { changeBalanceDisplay } from "./components/payloadDisplay.js";
 import { getMyAgentDisplay, myAgentDisplay } from "./components/myAgentDisplay.js";
 import isCheatCodeEnabled from "./services/cheatcodes.js";
 import csAgentsBuilder from "./services/csAgentBuilder.js";
+import { createBattleCard } from "./components/battleCards.js";
 
 // Clearing the local storage before starting the program
 localStorage.clear()
@@ -235,3 +236,16 @@ const toggleTeamDisplay = () => {
 // Adding the flip-screen function to the display team button
 document.getElementById('toggleTeamDisplayButton').addEventListener('click',toggleTeamDisplay)
 document.getElementById('toggleEnemyTeamDisplayButton').addEventListener('click',toggleTeamDisplay)
+
+
+// Create the battle simulator screen
+const setUpBattleSimulator = () => {
+    let myTeam = []
+    let enemyTeam = []
+
+    myTeam.push(createBattleCard(JSON.parse(localStorage.getItem('myBattlePayout'))))
+    console.log(myTeam)
+    document.getElementById('battleMyAgent').appendChild(createBattleCard(JSON.parse(localStorage.getItem('myBattlePayout'))))
+
+}
+document.getElementById('createTeamButton').addEventListener('click',setUpBattleSimulator)
