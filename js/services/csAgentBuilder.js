@@ -17,6 +17,10 @@ const getRandomWeaponByCategory = (weaponsObj, category) => {
 // Function to get the full equipment for an agent, based on the team passed as an argument
 const getAgentEquipmentByTeam = (team) => {
     const availableWeapons = team === localStorage.getItem('myTeam') ? JSON.parse(localStorage.getItem('weaponObject')) : JSON.parse(localStorage.getItem('enemyWeaponObject'))
+    // I get rid of the 'null' category that includes only one item if it exists on the object that I retrieve from the local storage
+    if(availableWeapons.hasOwnProperty('null')){
+        delete availableWeapons['null']
+    }
     let payload = {}
     let canAffordIt = false
     do{
@@ -43,8 +47,8 @@ const getAgentsPicsByTeam = async(team, number) => {
 
     // I remove my avatar from the array so no other agent from my team can have the same avatar image
     const myAgentImage = localStorage.getItem('myCharacterImage')
-    if(arrayOfPics.includes(myAgentImage)){
-        arrayOfPics.splice(arrayOfPics.indexOf(myAgentImage),1)
+    if(arrayOfPics.map(arr => arr[0]).includes(myAgentImage)){
+        arrayOfPics.splice(arrayOfPics.map(arr => arr[0]).indexOf(myAgentImage),1)
     }
 
     let arrayToReturn = []
@@ -141,29 +145,71 @@ const csAgentsBuilder = async() => {
     // Get user names
     let agentsNames = await getUserFullNameAndUsername()
     
-    // Get user payouts
+    // Get the teams
     const myTeam = localStorage.getItem('myTeam')
     const enemyTeam = localStorage.getItem('enemyTeam')
 
-    // Get avatars
+    // Get avatars and the IDs for each avatar
     const myTeamPics = await getAgentsPicsByTeam(myTeam, 3)
     const enemyTeamPics = await getAgentsPicsByTeam(enemyTeam, 4)
 
+    // I create the arrays that will contain objects with all the information for each team and each team member
     let myTeamPayout = []
     let enemyTeamPayout = []
+
+    // Populating the array for my team
     for(let i=0; i<3; i++){
         myTeamPayout.push({
             ...getAgentEquipmentByTeam(myTeam), 
             name: `${agentsNames.results[i].name.first} ${agentsNames.results[i].name.last}`,
-            image: myTeamPics[i],})
+            image: myTeamPics[i][0],
+            agentId: myTeamPics[i][1],
+        })
     }
+    // ...and now for the enemy team
     for(let i=0; i<4; i++){
         enemyTeamPayout.push({
             ...getAgentEquipmentByTeam(enemyTeam), 
             name: `${agentsNames.results[i+3].name.first} ${agentsNames.results[i+3].name.last}`,
-            image: enemyTeamPics[i],})
+            image: enemyTeamPics[i][0],
+            agentId: enemyTeamPics[i][1],
+        })
     }
 
+    // Rearreange the objects to save it for the battle simulator to use it later
+    let myTeamPayoutToSave = []
+    for(let i=0; i<myTeamPayout.length; i++){
+        let weaponsOnly = {...myTeamPayout[i]} // creating a copy
+        delete weaponsOnly.name // deleting the values that would get in the way while rearreanging the weapons and retrieving their IDs
+        delete weaponsOnly.image
+        delete weaponsOnly.agentId
+        myTeamPayoutToSave.push({
+            weaponsArray: [...Object.values(weaponsOnly).map(item => item.id)], // getting the weapons ID
+            name: myTeamPayout[i].name, // adding back the previously deleted values
+            agentId: myTeamPayout[i].agentId,
+            image: myTeamPayout[i].image,
+        })
+    }
+    // ...same process for the enemy team
+    let enemyTeamPayoutToSave = []
+    for(let i=0; i<enemyTeamPayout.length; i++){
+        let weaponsOnly = {...enemyTeamPayout[i]}
+        delete weaponsOnly.name
+        delete weaponsOnly.image
+        delete weaponsOnly.agentId
+        enemyTeamPayoutToSave.push({
+            weaponsArray: [...Object.values(weaponsOnly).map(item => item.id)],
+            name: enemyTeamPayout[i].name,
+            agentId: enemyTeamPayout[i].agentId,
+            image: enemyTeamPayout[i].image,
+        })
+    }
+
+    // Saving the teams information to use it later on the battle simulator
+    localStorage.setItem('myTeamPayout',JSON.stringify(myTeamPayoutToSave))
+    localStorage.setItem('enemyTeamPayout',JSON.stringify(enemyTeamPayoutToSave))
+
+    // Creating now the HTML elements for each agent and team
     let myTeamHtmlElements = []
     let enemyTeamHtmlElements = []
 
@@ -174,6 +220,7 @@ const csAgentsBuilder = async() => {
         enemyTeamHtmlElements.push(getAgentDisplay(enemyTeamPayout[i]))
     }
 
+    // Returning the HTML elements for each team
     return [myTeamHtmlElements, enemyTeamHtmlElements]
 }
 

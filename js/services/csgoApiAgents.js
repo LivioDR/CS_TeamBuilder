@@ -46,7 +46,7 @@ const getPicturesByTeam = async(team) => {
         let teamAgents = await getAgentsByTeam(team)
         let pics = []
         for(let i=0; i<teamAgents.length; i++){
-            pics.push(teamAgents[i].image)
+            pics.push([teamAgents[i].image, teamAgents[i].id])
         }
         return pics
     }

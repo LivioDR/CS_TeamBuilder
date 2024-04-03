@@ -1,6 +1,7 @@
 import { getWeaponInfoById } from "./payloadDisplay.js"
 
 const getMyAgentDisplay = () => {
+    // Creating the container to hold the HTML elements to be displayed
     let divContainer = document.createElement('div')
     divContainer.id = 'agentDisplayContainer'
     
@@ -56,6 +57,16 @@ const getMyAgentDisplay = () => {
         image.style.width = '40%'
         payloadCardsDiv.appendChild(image)
     }
+
+    // Creating the object to be used to set the agent stats for the battle simulator
+    const agentDetails = {
+        name: localStorage.getItem('myAgentCustomName'),
+        agentId: localStorage.getItem('myCharacterId'),
+        image: localStorage.getItem('myCharacterImage'),
+        weaponsArray: Object.values(JSON.parse(localStorage.getItem('currentPayload'))),
+    }
+    // All the data for my agent is done, I proceed to saving the object on the local storage to retrieve it later
+    localStorage.setItem('myBattlePayout',JSON.stringify(agentDetails))
     
     const agentImage = localStorage.getItem('myCharacterImage')
     let avatarImage = document.createElement('img')
