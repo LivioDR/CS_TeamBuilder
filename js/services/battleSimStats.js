@@ -20,6 +20,7 @@ const getAgentStats = (agentObject) => {
     weaponStats = weaponArray.reduce((acc, val) => acc + val, 0)
     const [atk, def] = [Number(weaponStats.toString().substring(0,3)), weaponStats%1000]
     const stats = {
+        maxHp : hp,
         hp: hp,
         atk: atk,
         def: def,
