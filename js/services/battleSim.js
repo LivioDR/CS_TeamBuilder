@@ -148,11 +148,11 @@ const isBattleCompleted = () => {
 // Plays a sound effect depending on the team received as a parameter
 const playSfx = (team) => {
     if(team == 'terrorists'){
-        let soundFx = new Audio('./assets/audio/tWins.mp3')
+        let soundFx = new Audio('./assets/audio/SFX/tWins.mp3')
         soundFx.play()
     }
     else {
-        let soundFx = new Audio('./assets/audio/ctWins.mp3')
+        let soundFx = new Audio('./assets/audio/SFX/ctWins.mp3')
         soundFx.play()    
     }
 }

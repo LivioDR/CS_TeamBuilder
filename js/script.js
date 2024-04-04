@@ -287,9 +287,9 @@ const setUpBattleSimulator = () => {
     // Managing music and sound effects
     const soundtrack = document.getElementById('soundtrack')
     soundtrack.pause() // pausing the background music
-    let soundFx = new Audio('./assets/audio/CSOkLetsGo.mp3')
+    let soundFx = new Audio('./assets/audio/SFX/CSOkLetsGo.mp3')
     soundFx.play() // play the sound effect
-    soundtrack.src = './assets/audio/BattleMusic.mp3' // change the menu music to the battle music
+    soundtrack.src = './assets/audio/BGM/BattleMusic.mp3' // change the menu music to the battle music
     if(speakerIcon.classList == "fa-solid fa-volume-high"){
         soundtrack.play() // if the music was already playing, start playing the new song
     }
