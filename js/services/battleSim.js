@@ -6,7 +6,7 @@
 // }
 const getAgentStats = (agentObject) => {
     const agentId = agentObject.agentId.split("-")[1]
-    const [hp, speed] = [Math.round(Number(agentId)*(Math.random()+0.5)), Number(agentId)%100]
+    const [hp, speed] = [Math.round(Number(agentId)*((Math.random()*0.5)+1)), 100 + Number(agentId)%100]
     let weaponArray = agentObject.weaponsArray.map(skinId => Number(skinId.split("-")[1]))
     
     // I check for NaN values since there are a small number of skin IDs that do not include numbers (i.e. 'skin-butterfly-knife' instead of 'skin-123456')
@@ -18,7 +18,7 @@ const getAgentStats = (agentObject) => {
     
     let weaponStats = 0
     weaponStats = weaponArray.reduce((acc, val) => acc + val, 0)
-    const [atk, def] = [Number(weaponStats.toString().substring(0,3)), weaponStats%1000]
+    const [atk, def] = [Number(weaponStats.toString().substring(0,3)), (200 + Math.floor(Math.log(weaponStats%1000)*5))]
     const stats = {
         maxHp : hp,
         hp: hp,
