@@ -42,7 +42,9 @@ const getTurnOrder = (arr) => {
 
 // Calculation of the damage done by one agent after subtracting the defense of the other agent. If the damage is less than 50, I set the damage as 50 by default
 const calculateDamage = (atk, def) => {
-    return atk - def > 50 ? atk-def : 50
+    let accuracy = Math.random() + 0.5 // have the chance to do 50% to 150% of damage depending on the accuracy result
+    let damage = Math.floor(accuracy * (atk - def))
+    return damage > 50 ? damage : 50
 }
 
 // Manage the health bar for an agent
