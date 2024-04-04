@@ -1,4 +1,4 @@
-import { getAgentStats } from "../services/battleSimStats.js"
+import { getAgentStats } from "../services/battleSim.js"
 
 // Function to create the cards to be used on the battle simulator
 const createBattleCard = (obj) => {
@@ -7,6 +7,9 @@ const createBattleCard = (obj) => {
     const name = obj.name
     const img = obj.image
     const stats = getAgentStats(obj)
+
+    // saving the stats to use them througout the battle
+    localStorage.setItem(`${obj.agentId}`,JSON.stringify(stats))
 
     // creating the container for the card
     let container = document.createElement('div')
@@ -21,12 +24,14 @@ const createBattleCard = (obj) => {
     agentH1Name.innerText = name
     agentH1Name.style.color = 'black'
     agentH1Name.style.margin = '0 auto'
+    agentH1Name.style.textAlign = 'center'
 
     let agentImg = document.createElement('img')
     agentImg.src = img
     agentImg.style.aspectRatio = '4/3'
     agentImg.style.objectFit = 'contain'
     agentImg.style.width = '100%'
+    agentImg.id = `${obj.agentId}-img`
 
     // HP bar creation
     let bar = document.createElement('div')
@@ -46,6 +51,7 @@ const createBattleCard = (obj) => {
     label.style.width = '40%'
     label.style.color = 'black'
     label.style.fontSize = '1em'
+    label.id = `${obj.agentId}-label`
     
     // Health bar styling
     bar.style.width = '55%'
@@ -54,6 +60,7 @@ const createBattleCard = (obj) => {
     fill.style.width = `${(stats.hp/stats.maxHp)*100}%`
     fill.style.height = '2em'
     fill.style.backgroundColor = 'green'
+    fill.id = `${obj.agentId}-hpFill`
     
     wrapper.appendChild(label)
     wrapper.appendChild(bar)

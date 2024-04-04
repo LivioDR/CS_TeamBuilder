@@ -72,7 +72,7 @@
                     <div id="weaponTypeDiv">
                         <!-- To be populated when clicking on the categories -->
                     </div>
-                    <div id="skinTypeDiv" style="display: flex; flex-direction: row; flex-wrap: wrap; width: 50%; margin-inline: 3%; max-height: 40vw; overflow-y: scroll;">
+                    <div id="skinTypeDiv" style="display: flex; flex-direction: row; flex-wrap: wrap; width: 50%; margin-inline: 3%; max-height: 70vh; overflow-y: scroll;">
                         <!-- To be populated with the fetched skins data -->
                     </div>
                 </div>
@@ -105,9 +105,14 @@
                 <div class="front-screen">
                     <div class="teamsHeaderContainer">
                         <h1 id="teamName" style="text-align: center;"></h1>
-                        <button id="toggleTeamDisplayButton">
-                            Display enemy team
-                        </button>
+                        <div class="btnContainer">
+                            <button id="toggleTeamDisplayButton">
+                                Display enemy team
+                            </button>
+                            <button class="startBattleBtn">
+                                Start the battle
+                            </button>
+                        </div>
                     </div>
                     <div id="teamDisplay">
                         <!-- Team members and equipment to be populated on JS -->
@@ -116,9 +121,14 @@
                 <div class="back-screen">
                     <div class="teamsHeaderContainer">
                         <h1 id="enemyTeamName" style="text-align: center;">Enemy Team</h1>
-                        <button id="toggleEnemyTeamDisplayButton">
-                            Display my team
-                        </button>
+                        <div class="btnContainer">
+                            <button id="toggleEnemyTeamDisplayButton">
+                                Display my team
+                            </button>
+                            <button class="startBattleBtn">
+                                Start the battle
+                            </button>
+                        </div>
                     </div>
                     <div id="enemyTeamDisplay">
                         <!-- Enemy team members and equipment to be populated on JS -->

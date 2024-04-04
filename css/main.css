@@ -106,13 +106,17 @@ transform: rotateY(180deg);
 }
 /* End of the adapted tutorial CSS code */
 
-#toggleTeamDisplayButton, #toggleEnemyTeamDisplayButton {
+#toggleTeamDisplayButton, #toggleEnemyTeamDisplayButton, .startBattleBtn {
     width: 30%;
-    margin-inline: 35%;
     margin-top: 0%;
     margin-bottom: 2%;
 }
-
+.btnContainer{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-around;
+}
 /* BATTLE SIMULATOR STYLING */
 #battleSim {
     display: flex;

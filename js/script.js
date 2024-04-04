@@ -8,6 +8,7 @@ import { getMyAgentDisplay, myAgentDisplay } from "./components/myAgentDisplay.j
 import isCheatCodeEnabled from "./services/cheatcodes.js";
 import csAgentsBuilder from "./services/csAgentBuilder.js";
 import { createBattleCard } from "./components/battleCards.js";
+import { executeBattle } from "./services/battleSim.js";
 
 // Clearing the local storage before starting the program
 localStorage.clear()
@@ -211,11 +212,6 @@ const teamOverviewScreen = async() => {
     document.getElementById('fifthScreen').hidden = true
     document.getElementById('sixthScreen').hidden = false
 
-    // TO BE HANDLED UPON PRESSING A 'START BATTLE' BUTTON
-    // Setting up the battle simulator screen after retrieving the agents info for both team
-    setUpBattleSimulator()
-    // END OF TESTING CODE
-    
 }
 // Assigning the function to move from 5->6 screen to the create team button
 document.getElementById('createTeamButton').addEventListener('click',teamOverviewScreen)
@@ -248,8 +244,6 @@ const setUpBattleSimulator = () => {
     // Temporary array to retrieve the agents information from local storage
     let localMyTeamPayload = JSON.parse(localStorage.getItem('myTeamPayload'))
     let localEnemyTeamPayload = JSON.parse(localStorage.getItem('enemyTeamPayload'))
-    console.log(localMyTeamPayload)
-    console.log(localEnemyTeamPayload)
 
     // Arrays to hold the HTML elements
     let myTeam = []
@@ -259,15 +253,24 @@ const setUpBattleSimulator = () => {
     myTeam.push(createBattleCard(JSON.parse(localStorage.getItem('myBattlePayload'))))
     document.getElementById('battleMyAgent').appendChild(createBattleCard(JSON.parse(localStorage.getItem('myBattlePayload'))))
     
+    // Adding arrays to save on the local storage to keep track of the agents on each team
+    let aliveOnMyTeam = []
+    let aliveOnEnemyTeam = []
+    aliveOnMyTeam.push(localStorage.getItem('myCharacterId'))
+
     // Preparing the teams cards to add them to the DOM
     for(let i=0; i<localMyTeamPayload.length; i++){
         myTeam.push(createBattleCard(localMyTeamPayload[i]))
+        aliveOnMyTeam.push(localMyTeamPayload[i].agentId)
     }
     for(let i=0; i<localEnemyTeamPayload.length; i++){
         enemyTeam.push(createBattleCard(localEnemyTeamPayload[i]))
+        aliveOnEnemyTeam.push(localEnemyTeamPayload[i].agentId)
     }
-    console.log(myTeam)
-    console.log(enemyTeam)
+
+    // Saving the alive team members info on the local storage
+    localStorage.setItem('aliveOnMyTeam',JSON.stringify(aliveOnMyTeam))
+    localStorage.setItem('aliveOnEnemyTeam',JSON.stringify(aliveOnEnemyTeam))
 
     // Adding the agents to the DOM
     document.getElementById('battleAgent2').appendChild(myTeam[1])
@@ -281,12 +284,21 @@ const setUpBattleSimulator = () => {
     document.getElementById('sixthScreen').hidden = true
     document.getElementById('battleSim').hidden = false
 
-    let soundFx = new Audio('./assets/audio/CSOkLetsGo.mp3')
-    soundFx.play()
-
+    // Managing music and sound effects
     const soundtrack = document.getElementById('soundtrack')
-    soundtrack.pause()
-    soundtrack.src = './assets/audio/BattleMusic.mp3'
-    soundtrack.play()
+    soundtrack.pause() // pausing the background music
+    let soundFx = new Audio('./assets/audio/CSOkLetsGo.mp3')
+    soundFx.play() // play the sound effect
+    soundtrack.src = './assets/audio/BattleMusic.mp3' // change the menu music to the battle music
+    if(speakerIcon.classList == "fa-solid fa-volume-high"){
+        soundtrack.play() // if the music was already playing, start playing the new song
+    }
 
+    // Start the battle
+    executeBattle()
+
+}
+const startBattleButtons = document.querySelectorAll('.startBattleBtn')
+for(let i=0; i<startBattleButtons.length; i++){
+    startBattleButtons[i].addEventListener('click',setUpBattleSimulator)
 }

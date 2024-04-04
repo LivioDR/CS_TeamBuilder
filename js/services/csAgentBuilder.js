@@ -44,13 +44,11 @@ const getAgentEquipmentByTeam = (team) => {
 // Function to return a set number of agents images by team
 const getAgentsPicsByTeam = async(team, number) => {
     let arrayOfPics = await getPicturesByTeam(team)
-
     // I remove my avatar from the array so no other agent from my team can have the same avatar image
-    const myAgentImage = localStorage.getItem('myCharacterImage')
-    if(arrayOfPics.map(arr => arr[0]).includes(myAgentImage)){
-        arrayOfPics.splice(arrayOfPics.map(arr => arr[0]).indexOf(myAgentImage),1)
+    const myAgentId = localStorage.getItem('myCharacterId')
+    if(arrayOfPics.map(arr => arr[1]).includes(myAgentId)){
+        arrayOfPics.splice(arrayOfPics.map(arr => arr[1]).indexOf(myAgentId),1)
     }
-
     let arrayToReturn = []
     while(arrayToReturn.length < number){
         let index = Math.floor(Math.random() * arrayOfPics.length)
