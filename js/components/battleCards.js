@@ -61,7 +61,7 @@ const createBattleCard = (obj) => {
 
     // Remaining stats container
     let tableContainer = document.createElement('div')
-    tableContainer.innerHTML = `<table style="color: black;">
+    tableContainer.innerHTML = `<table>
                                     <thead><tr><th>Atk</th><th>Def</th><th>Spd</th></tr></thead>
                                     <tbody><tr><td>${stats.atk}</td><td>${stats.def}</td><td>${stats.spd}</td></tr></tbody>
                                 </table>`

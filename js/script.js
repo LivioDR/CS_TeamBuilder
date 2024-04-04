@@ -108,7 +108,14 @@ const selectWeaponScreen = async() => {
     stringLengthValidation()
     
     // I check for any cheat codes that the user may have entered. If the user enters a cheatcode I activate it, but don't move to the next screen to allow the user enter an actual agent name. If the entered name does not match a cheat code, I execute the rest of the script
-    if(!isCheatCodeEnabled() && agentSelectedValidation()){
+    if(isCheatCodeEnabled()){
+        const confirmButton = document.getElementById('confirmAgentBtn')
+        confirmButton.style.backgroundColor = 'lightgreen'
+        setTimeout(() => {
+            confirmButton.style.backgroundColor = '#F0F0F0'
+        }, 500);
+    }
+    else if(!isCheatCodeEnabled() && agentSelectedValidation()){
 
         // I retrieve all the weapons information for both teams and rearreange it on custom objects
         weaponsForMyTeam = await getSkinByTeamGroupedByCategoryAndWeapon(team)
@@ -137,14 +144,6 @@ const selectWeaponScreen = async() => {
             }
         }
     }
-    else if(isCheatCodeEnabled()){
-        const confirmButton = document.getElementById('confirmAgentBtn')
-        confirmButton.style.backgroundColor = 'lightgreen'
-        setTimeout(() => {
-            confirmButton.style.backgroundColor = '#F0F0F0'
-        }, 500);
-    }
-
 }
 
 // Assignning the function to move from 3->4 screen to the continue button
@@ -211,6 +210,11 @@ const teamOverviewScreen = async() => {
     // Hiding the fifth screen and showing the sixth screen
     document.getElementById('fifthScreen').hidden = true
     document.getElementById('sixthScreen').hidden = false
+
+    // TO BE HANDLED UPON PRESSING A 'START BATTLE' BUTTON
+    // Setting up the battle simulator screen after retrieving the agents info for both team
+    setUpBattleSimulator()
+    // END OF TESTING CODE
     
 }
 // Assigning the function to move from 5->6 screen to the create team button
@@ -238,14 +242,51 @@ document.getElementById('toggleTeamDisplayButton').addEventListener('click',togg
 document.getElementById('toggleEnemyTeamDisplayButton').addEventListener('click',toggleTeamDisplay)
 
 
-// Create the battle simulator screen
+// Create the battle simulator screen and change from the teams display screen to the simulator
 const setUpBattleSimulator = () => {
+    
+    // Temporary array to retrieve the agents information from local storage
+    let localMyTeamPayload = JSON.parse(localStorage.getItem('myTeamPayload'))
+    let localEnemyTeamPayload = JSON.parse(localStorage.getItem('enemyTeamPayload'))
+    console.log(localMyTeamPayload)
+    console.log(localEnemyTeamPayload)
+
+    // Arrays to hold the HTML elements
     let myTeam = []
     let enemyTeam = []
 
-    myTeam.push(createBattleCard(JSON.parse(localStorage.getItem('myBattlePayout'))))
+    // Adding my agent to the DOM
+    myTeam.push(createBattleCard(JSON.parse(localStorage.getItem('myBattlePayload'))))
+    document.getElementById('battleMyAgent').appendChild(createBattleCard(JSON.parse(localStorage.getItem('myBattlePayload'))))
+    
+    // Preparing the teams cards to add them to the DOM
+    for(let i=0; i<localMyTeamPayload.length; i++){
+        myTeam.push(createBattleCard(localMyTeamPayload[i]))
+    }
+    for(let i=0; i<localEnemyTeamPayload.length; i++){
+        enemyTeam.push(createBattleCard(localEnemyTeamPayload[i]))
+    }
     console.log(myTeam)
-    document.getElementById('battleMyAgent').appendChild(createBattleCard(JSON.parse(localStorage.getItem('myBattlePayout'))))
+    console.log(enemyTeam)
+
+    // Adding the agents to the DOM
+    document.getElementById('battleAgent2').appendChild(myTeam[1])
+    document.getElementById('battleAgent3').appendChild(myTeam[2])
+    document.getElementById('battleAgent4').appendChild(myTeam[3])
+    document.getElementById('battleAgent5').appendChild(enemyTeam[0])
+    document.getElementById('battleAgent6').appendChild(enemyTeam[1])
+    document.getElementById('battleAgent7').appendChild(enemyTeam[2])
+    document.getElementById('battleAgent8').appendChild(enemyTeam[3])
+    
+    document.getElementById('sixthScreen').hidden = true
+    document.getElementById('battleSim').hidden = false
+
+    let soundFx = new Audio('./assets/audio/CSOkLetsGo.mp3')
+    soundFx.play()
+
+    const soundtrack = document.getElementById('soundtrack')
+    soundtrack.pause()
+    soundtrack.src = './assets/audio/BattleMusic.mp3'
+    soundtrack.play()
 
 }
-document.getElementById('createTeamButton').addEventListener('click',setUpBattleSimulator)

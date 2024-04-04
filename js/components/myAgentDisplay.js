@@ -66,7 +66,7 @@ const getMyAgentDisplay = () => {
         weaponsArray: Object.values(JSON.parse(localStorage.getItem('currentPayload'))),
     }
     // All the data for my agent is done, I proceed to saving the object on the local storage to retrieve it later
-    localStorage.setItem('myBattlePayout',JSON.stringify(agentDetails))
+    localStorage.setItem('myBattlePayload',JSON.stringify(agentDetails))
     
     const agentImage = localStorage.getItem('myCharacterImage')
     let avatarImage = document.createElement('img')

@@ -114,16 +114,28 @@ transform: rotateY(180deg);
 }
 
 /* BATTLE SIMULATOR STYLING */
+#battleSim {
+    display: flex;
+    justify-content: space-between;
+}
 .battleTeamContainer {
     width: 50%;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
 }
+#battleEnemyTeam {
+    justify-content: flex-end;
+}
 .battleCard {
-    width: 45%;
-    margin: 0%;
+    width: 40%;
+    margin: 2%;
 }
 th, td {
     color: black;
+    width: 30%;
+    text-align: center;
+}
+tr{
+    width: 100%;
 }

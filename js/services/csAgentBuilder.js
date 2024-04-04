@@ -154,12 +154,12 @@ const csAgentsBuilder = async() => {
     const enemyTeamPics = await getAgentsPicsByTeam(enemyTeam, 4)
 
     // I create the arrays that will contain objects with all the information for each team and each team member
-    let myTeamPayout = []
-    let enemyTeamPayout = []
+    let myTeamPayload = []
+    let enemyTeamPayload = []
 
     // Populating the array for my team
     for(let i=0; i<3; i++){
-        myTeamPayout.push({
+        myTeamPayload.push({
             ...getAgentEquipmentByTeam(myTeam), 
             name: `${agentsNames.results[i].name.first} ${agentsNames.results[i].name.last}`,
             image: myTeamPics[i][0],
@@ -168,7 +168,7 @@ const csAgentsBuilder = async() => {
     }
     // ...and now for the enemy team
     for(let i=0; i<4; i++){
-        enemyTeamPayout.push({
+        enemyTeamPayload.push({
             ...getAgentEquipmentByTeam(enemyTeam), 
             name: `${agentsNames.results[i+3].name.first} ${agentsNames.results[i+3].name.last}`,
             image: enemyTeamPics[i][0],
@@ -177,47 +177,47 @@ const csAgentsBuilder = async() => {
     }
 
     // Rearreange the objects to save it for the battle simulator to use it later
-    let myTeamPayoutToSave = []
-    for(let i=0; i<myTeamPayout.length; i++){
-        let weaponsOnly = {...myTeamPayout[i]} // creating a copy
+    let myTeamPayloadToSave = []
+    for(let i=0; i<myTeamPayload.length; i++){
+        let weaponsOnly = {...myTeamPayload[i]} // creating a copy
         delete weaponsOnly.name // deleting the values that would get in the way while rearreanging the weapons and retrieving their IDs
         delete weaponsOnly.image
         delete weaponsOnly.agentId
-        myTeamPayoutToSave.push({
+        myTeamPayloadToSave.push({
             weaponsArray: [...Object.values(weaponsOnly).map(item => item.id)], // getting the weapons ID
-            name: myTeamPayout[i].name, // adding back the previously deleted values
-            agentId: myTeamPayout[i].agentId,
-            image: myTeamPayout[i].image,
+            name: myTeamPayload[i].name, // adding back the previously deleted values
+            agentId: myTeamPayload[i].agentId,
+            image: myTeamPayload[i].image,
         })
     }
     // ...same process for the enemy team
-    let enemyTeamPayoutToSave = []
-    for(let i=0; i<enemyTeamPayout.length; i++){
-        let weaponsOnly = {...enemyTeamPayout[i]}
+    let enemyTeamPayloadToSave = []
+    for(let i=0; i<enemyTeamPayload.length; i++){
+        let weaponsOnly = {...enemyTeamPayload[i]}
         delete weaponsOnly.name
         delete weaponsOnly.image
         delete weaponsOnly.agentId
-        enemyTeamPayoutToSave.push({
+        enemyTeamPayloadToSave.push({
             weaponsArray: [...Object.values(weaponsOnly).map(item => item.id)],
-            name: enemyTeamPayout[i].name,
-            agentId: enemyTeamPayout[i].agentId,
-            image: enemyTeamPayout[i].image,
+            name: enemyTeamPayload[i].name,
+            agentId: enemyTeamPayload[i].agentId,
+            image: enemyTeamPayload[i].image,
         })
     }
 
     // Saving the teams information to use it later on the battle simulator
-    localStorage.setItem('myTeamPayout',JSON.stringify(myTeamPayoutToSave))
-    localStorage.setItem('enemyTeamPayout',JSON.stringify(enemyTeamPayoutToSave))
+    localStorage.setItem('myTeamPayload',JSON.stringify(myTeamPayloadToSave))
+    localStorage.setItem('enemyTeamPayload',JSON.stringify(enemyTeamPayloadToSave))
 
     // Creating now the HTML elements for each agent and team
     let myTeamHtmlElements = []
     let enemyTeamHtmlElements = []
 
-    for(let i=0; i<myTeamPayout.length; i++){
-        myTeamHtmlElements.push(getAgentDisplay(myTeamPayout[i]))
+    for(let i=0; i<myTeamPayload.length; i++){
+        myTeamHtmlElements.push(getAgentDisplay(myTeamPayload[i]))
     }
-    for(let i=0; i<enemyTeamPayout.length; i++){
-        enemyTeamHtmlElements.push(getAgentDisplay(enemyTeamPayout[i]))
+    for(let i=0; i<enemyTeamPayload.length; i++){
+        enemyTeamHtmlElements.push(getAgentDisplay(enemyTeamPayload[i]))
     }
 
     // Returning the HTML elements for each team
