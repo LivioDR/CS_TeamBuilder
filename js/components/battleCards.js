@@ -72,6 +72,7 @@ const createBattleCard = (obj) => {
                                     <thead><tr><th>Atk</th><th>Def</th><th>Spd</th></tr></thead>
                                     <tbody><tr><td>${stats.atk}</td><td>${stats.def}</td><td>${stats.spd}</td></tr></tbody>
                                 </table>`
+    tableContainer.style.width = '100%'
     
     // adding everything to the main container
     container.appendChild(agentH1Name)

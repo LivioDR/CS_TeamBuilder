@@ -178,6 +178,8 @@ const teamOverviewScreen = async() => {
     const teamName = document.getElementById('teamNameInput').value.trim()
     // Showing the team name on the h1 element of the screen
     document.getElementById('teamName').innerHTML = teamName
+    // Saving it also for later
+    localStorage.setItem('myTeamName',teamName)
 
     // Get the HTML elements for my agent, my team, and the enemies
     const myAgent = getMyAgentDisplay()
@@ -241,6 +243,11 @@ document.getElementById('toggleEnemyTeamDisplayButton').addEventListener('click'
 // Create the battle simulator screen and change from the teams display screen to the simulator
 const setUpBattleSimulator = () => {
     
+    // Setting the team names
+    document.getElementById('myTeamBattleName').innerHTML = localStorage.getItem('myTeamName')
+    document.getElementById('enemyTeamBattleName').innerHTML = 'EnemyTeam'
+
+
     // Temporary array to retrieve the agents information from local storage
     let localMyTeamPayload = JSON.parse(localStorage.getItem('myTeamPayload'))
     let localEnemyTeamPayload = JSON.parse(localStorage.getItem('enemyTeamPayload'))

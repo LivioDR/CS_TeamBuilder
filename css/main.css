@@ -120,7 +120,20 @@ transform: rotateY(180deg);
 /* BATTLE SIMULATOR STYLING */
 #battleSim {
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
+} 
+#teamsContainer {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+}
+#teamBattleNames{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-around;
+    font-size: 2.5em;
 }
 .battleTeamContainer {
     width: 50%;
@@ -132,14 +145,14 @@ transform: rotateY(180deg);
     justify-content: flex-end;
 }
 .battleCard {
-    width: 40%;
+    width: 35%;
     margin: 2%;
 }
 th, td {
     color: black;
-    width: 30%;
     text-align: center;
 }
-tr{
-    width: 100%;
+table {
+    width: 65%;
+    margin: 0 auto;
 }
