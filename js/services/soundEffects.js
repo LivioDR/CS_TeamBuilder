@@ -1,5 +1,5 @@
 // Plays a sound effect depending on the string as a parameter
-const playSfx = (sound) => {
+const playSfx = async(sound) => {
     let soundFx;
     switch(sound){
         case 'okLetsGo':

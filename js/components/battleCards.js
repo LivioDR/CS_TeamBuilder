@@ -14,7 +14,7 @@ const createBattleCard = (obj) => {
     // creating the container for the card
     let container = document.createElement('div')
     container.style.borderRadius = '50px'
-    container.style.backgroundColor = 'lightgray'
+    container.style.backgroundColor = 'rgba(150, 150, 150, 0.7)'
     container.style.display = 'flex'
     container.style.flexDirection = 'column'
     container.style.justifyContent = 'space-between'
@@ -41,20 +41,22 @@ const createBattleCard = (obj) => {
     
     // wrapper styling
     wrapper.style.display = 'flex'
-    wrapper.style.flexDirection = 'row'
+    wrapper.style.flexDirection = 'column'
     wrapper.style.justifyContent = 'center'
     wrapper.style.alignItems = 'center'
     wrapper.style.width = '100%'
     
     // Remaining HP v Max HP
     label.innerText = `${stats.hp} / ${stats.maxHp}`
-    label.style.width = '40%'
+    label.style.width = '100%'
     label.style.color = 'black'
     label.style.fontSize = '1em'
+    label.style.textAlign = 'center'
+    label.style.margin = '0%'
     label.id = `${obj.agentId}-label`
     
     // Health bar styling
-    bar.style.width = '55%'
+    bar.style.width = '90%'
     bar.style.backgroundColor = 'red'
     bar.style.height = '2em'
     fill.style.width = `${(stats.hp/stats.maxHp)*100}%`
