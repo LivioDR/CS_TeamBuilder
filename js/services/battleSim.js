@@ -1,3 +1,5 @@
+import playSfx from "./soundEffects.js"
+
 // Receives an object with the agent ID, and an array with the ID of every selected weapon to create the stats for the battle with them
 // Object structure:
 // agentObject = {
@@ -75,10 +77,19 @@ const changeHp = (agent, damage) => {
 
         if(myTeam.includes(agent)){
             myTeam.splice(myTeam.indexOf(agent),1)
+            if(myTeam.length == 2){
+                playSfx('takingFire')
+            }
             localStorage.setItem('aliveOnMyTeam',JSON.stringify(myTeam))
         }
         if(enemyTeam.includes(agent)){
             enemyTeam.splice(enemyTeam.indexOf(agent),1)
+            if(enemyTeam.length == 3){
+                playSfx('fireInTheHole')
+            }
+            if(enemyTeam.length == 1){
+                playSfx('enemyDown')
+            }
             localStorage.setItem('aliveOnEnemyTeam',JSON.stringify(enemyTeam))
         }
     }
@@ -144,18 +155,6 @@ const isBattleCompleted = () => {
     }
     else {
         return false
-    }
-}
-
-// Plays a sound effect depending on the team received as a parameter
-const playSfx = (team) => {
-    if(team == 'terrorists'){
-        let soundFx = new Audio('./assets/audio/SFX/tWins.mp3')
-        soundFx.play()
-    }
-    else {
-        let soundFx = new Audio('./assets/audio/SFX/ctWins.mp3')
-        soundFx.play()    
     }
 }
 

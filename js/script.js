@@ -9,6 +9,7 @@ import isCheatCodeEnabled from "./services/cheatcodes.js";
 import csAgentsBuilder from "./services/csAgentBuilder.js";
 import { createBattleCard } from "./components/battleCards.js";
 import { executeBattle } from "./services/battleSim.js";
+import playSfx from "./services/soundEffects.js";
 
 // Clearing the local storage before starting the program
 localStorage.clear()
@@ -294,8 +295,7 @@ const setUpBattleSimulator = () => {
     // Managing music and sound effects
     const soundtrack = document.getElementById('soundtrack')
     soundtrack.pause() // pausing the background music
-    let soundFx = new Audio('./assets/audio/SFX/CSOkLetsGo.mp3')
-    soundFx.play() // play the sound effect
+    playSfx('okLetsGo') // play the starting sound effect
     soundtrack.src = './assets/audio/BGM/BattleMusic.mp3' // change the menu music to the battle music
     if(speakerIcon.classList == "fa-solid fa-volume-high"){
         soundtrack.play() // if the music was already playing, start playing the new song
