@@ -7,6 +7,9 @@ import { changeBalanceDisplay } from "./components/payloadDisplay.js";
 import { getMyAgentDisplay, myAgentDisplay } from "./components/myAgentDisplay.js";
 import isCheatCodeEnabled from "./services/cheatcodes.js";
 import csAgentsBuilder from "./services/csAgentBuilder.js";
+import { createBattleCard } from "./components/battleCards.js";
+import { executeBattle } from "./services/battleSim.js";
+import playSfx from "./services/soundEffects.js";
 
 // Clearing the local storage before starting the program
 localStorage.clear()
@@ -107,7 +110,14 @@ const selectWeaponScreen = async() => {
     stringLengthValidation()
     
     // I check for any cheat codes that the user may have entered. If the user enters a cheatcode I activate it, but don't move to the next screen to allow the user enter an actual agent name. If the entered name does not match a cheat code, I execute the rest of the script
-    if(!isCheatCodeEnabled() && agentSelectedValidation()){
+    if(isCheatCodeEnabled()){
+        const confirmButton = document.getElementById('confirmAgentBtn')
+        confirmButton.style.backgroundColor = 'lightgreen'
+        setTimeout(() => {
+            confirmButton.style.backgroundColor = '#F0F0F0'
+        }, 500);
+    }
+    else if(!isCheatCodeEnabled() && agentSelectedValidation()){
 
         // I retrieve all the weapons information for both teams and rearreange it on custom objects
         weaponsForMyTeam = await getSkinByTeamGroupedByCategoryAndWeapon(team)
@@ -136,14 +146,6 @@ const selectWeaponScreen = async() => {
             }
         }
     }
-    else if(isCheatCodeEnabled()){
-        const confirmButton = document.getElementById('confirmAgentBtn')
-        confirmButton.style.backgroundColor = 'lightgreen'
-        setTimeout(() => {
-            confirmButton.style.backgroundColor = '#F0F0F0'
-        }, 500);
-    }
-
 }
 
 // Assignning the function to move from 3->4 screen to the continue button
@@ -177,6 +179,8 @@ const teamOverviewScreen = async() => {
     const teamName = document.getElementById('teamNameInput').value.trim()
     // Showing the team name on the h1 element of the screen
     document.getElementById('teamName').innerHTML = teamName
+    // Saving it also for later
+    localStorage.setItem('myTeamName',teamName)
 
     // Get the HTML elements for my agent, my team, and the enemies
     const myAgent = getMyAgentDisplay()
@@ -210,7 +214,7 @@ const teamOverviewScreen = async() => {
     // Hiding the fifth screen and showing the sixth screen
     document.getElementById('fifthScreen').hidden = true
     document.getElementById('sixthScreen').hidden = false
-    
+
 }
 // Assigning the function to move from 5->6 screen to the create team button
 document.getElementById('createTeamButton').addEventListener('click',teamOverviewScreen)
@@ -235,3 +239,73 @@ const toggleTeamDisplay = () => {
 // Adding the flip-screen function to the display team button
 document.getElementById('toggleTeamDisplayButton').addEventListener('click',toggleTeamDisplay)
 document.getElementById('toggleEnemyTeamDisplayButton').addEventListener('click',toggleTeamDisplay)
+
+
+// Create the battle simulator screen and change from the teams display screen to the simulator
+const setUpBattleSimulator = () => {
+    
+    // Setting the team names
+    document.getElementById('myTeamBattleName').innerHTML = localStorage.getItem('myTeamName')
+    document.getElementById('enemyTeamBattleName').innerHTML = 'EnemyTeam'
+
+
+    // Temporary array to retrieve the agents information from local storage
+    let localMyTeamPayload = JSON.parse(localStorage.getItem('myTeamPayload'))
+    let localEnemyTeamPayload = JSON.parse(localStorage.getItem('enemyTeamPayload'))
+
+    // Arrays to hold the HTML elements
+    let myTeam = []
+    let enemyTeam = []
+
+    // Adding my agent to the DOM
+    myTeam.push(createBattleCard(JSON.parse(localStorage.getItem('myBattlePayload'))))
+    document.getElementById('battleMyAgent').appendChild(createBattleCard(JSON.parse(localStorage.getItem('myBattlePayload'))))
+    
+    // Adding arrays to save on the local storage to keep track of the agents on each team
+    let aliveOnMyTeam = []
+    let aliveOnEnemyTeam = []
+    aliveOnMyTeam.push(localStorage.getItem('myCharacterId'))
+
+    // Preparing the teams cards to add them to the DOM
+    for(let i=0; i<localMyTeamPayload.length; i++){
+        myTeam.push(createBattleCard(localMyTeamPayload[i]))
+        aliveOnMyTeam.push(localMyTeamPayload[i].agentId)
+    }
+    for(let i=0; i<localEnemyTeamPayload.length; i++){
+        enemyTeam.push(createBattleCard(localEnemyTeamPayload[i]))
+        aliveOnEnemyTeam.push(localEnemyTeamPayload[i].agentId)
+    }
+
+    // Saving the alive team members info on the local storage
+    localStorage.setItem('aliveOnMyTeam',JSON.stringify(aliveOnMyTeam))
+    localStorage.setItem('aliveOnEnemyTeam',JSON.stringify(aliveOnEnemyTeam))
+
+    // Adding the agents to the DOM
+    document.getElementById('battleAgent2').appendChild(myTeam[1])
+    document.getElementById('battleAgent3').appendChild(myTeam[2])
+    document.getElementById('battleAgent4').appendChild(myTeam[3])
+    document.getElementById('battleAgent5').appendChild(enemyTeam[0])
+    document.getElementById('battleAgent6').appendChild(enemyTeam[1])
+    document.getElementById('battleAgent7').appendChild(enemyTeam[2])
+    document.getElementById('battleAgent8').appendChild(enemyTeam[3])
+    
+    document.getElementById('sixthScreen').hidden = true
+    document.getElementById('battleSim').hidden = false
+
+    // Managing music and sound effects
+    const soundtrack = document.getElementById('soundtrack')
+    soundtrack.pause() // pausing the background music
+    playSfx('okLetsGo') // play the starting sound effect
+    soundtrack.src = './assets/audio/BGM/BattleMusic.mp3' // change the menu music to the battle music
+    if(speakerIcon.classList == "fa-solid fa-volume-high"){
+        soundtrack.play() // if the music was already playing, start playing the new song
+    }
+
+    // Start the battle
+    executeBattle()
+
+}
+const startBattleButtons = document.querySelectorAll('.startBattleBtn')
+for(let i=0; i<startBattleButtons.length; i++){
+    startBattleButtons[i].addEventListener('click',setUpBattleSimulator)
+}

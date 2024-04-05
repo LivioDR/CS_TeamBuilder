@@ -106,9 +106,53 @@ transform: rotateY(180deg);
 }
 /* End of the adapted tutorial CSS code */
 
-#toggleTeamDisplayButton, #toggleEnemyTeamDisplayButton {
+#toggleTeamDisplayButton, #toggleEnemyTeamDisplayButton, .startBattleBtn {
     width: 30%;
-    margin-inline: 35%;
     margin-top: 0%;
     margin-bottom: 2%;
+}
+.btnContainer{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-around;
+}
+/* BATTLE SIMULATOR STYLING */
+#battleSim {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+} 
+#teamsContainer {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+}
+#teamBattleNames{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-around;
+    font-size: 2.5em;
+}
+.battleTeamContainer {
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+#battleEnemyTeam {
+    justify-content: flex-end;
+}
+.battleCard {
+    width: 35%;
+    margin: 2%;
+}
+th, td {
+    color: black;
+    text-align: center;
+}
+table {
+    width: 65%;
+    margin: 0 auto;
 }
