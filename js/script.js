@@ -242,7 +242,7 @@ document.getElementById('toggleEnemyTeamDisplayButton').addEventListener('click'
 
 
 // Create the battle simulator screen and change from the teams display screen to the simulator
-const setUpBattleSimulator = () => {
+const setUpBattleSimulator = async() => {
     
     // Setting the team names
     document.getElementById('myTeamBattleName').innerHTML = localStorage.getItem('myTeamName')
@@ -295,7 +295,7 @@ const setUpBattleSimulator = () => {
     // Managing music and sound effects
     const soundtrack = document.getElementById('soundtrack')
     soundtrack.pause() // pausing the background music
-    playSfx('okLetsGo') // play the starting sound effect
+    await playSfx('okLetsGo') // play the starting sound effect
     soundtrack.src = './assets/audio/BGM/BattleMusic.mp3' // change the menu music to the battle music
     if(speakerIcon.classList == "fa-solid fa-volume-high"){
         soundtrack.play() // if the music was already playing, start playing the new song

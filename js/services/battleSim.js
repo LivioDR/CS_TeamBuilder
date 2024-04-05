@@ -1,3 +1,4 @@
+import MAPS_ARRAY from "../utilities/mapsArray.js"
 import playSfx from "./soundEffects.js"
 
 // Receives an object with the agent ID, and an array with the ID of every selected weapon to create the stats for the battle with them
@@ -77,17 +78,17 @@ const changeHp = (agent, damage) => {
 
         if(myTeam.includes(agent)){
             myTeam.splice(myTeam.indexOf(agent),1)
-            if(myTeam.length == 2){
+            if(myTeam.length == 3){
                 playSfx('takingFire')
             }
             localStorage.setItem('aliveOnMyTeam',JSON.stringify(myTeam))
         }
         if(enemyTeam.includes(agent)){
             enemyTeam.splice(enemyTeam.indexOf(agent),1)
-            if(enemyTeam.length == 3){
+            if(enemyTeam.length + myTeam.length == 6){
                 playSfx('fireInTheHole')
             }
-            if(enemyTeam.length == 1){
+            if(enemyTeam.length == 3){
                 playSfx('enemyDown')
             }
             localStorage.setItem('aliveOnEnemyTeam',JSON.stringify(enemyTeam))
@@ -158,7 +159,18 @@ const isBattleCompleted = () => {
     }
 }
 
+// Select a random map from the list of available maps
+const selectMap = () => {
+    const mapContainer = document.getElementById('teamsContainer')
+    mapContainer.style.backgroundImage = `url(${MAPS_ARRAY[Math.floor(Math.random() * MAPS_ARRAY.length)]}`
+    mapContainer.style.backgroundSize = 'cover'
+}
+
 const executeBattle = async() => {
+    // Adding the map to the background
+    selectMap()
+    
+    // Starting the battle on a loop that will break whenever a team has no more agents alive
     while(true){
         let arrayOfAliveAgents = getAllAliveAgents()
         let turnOrder = getTurnOrder(arrayOfAliveAgents)
@@ -171,7 +183,7 @@ const executeBattle = async() => {
             const timer = (ms) => {
                 return new Promise(res => setTimeout(res, ms));
             }
-            await timer(50)
+            await timer(100)
 
             // I check if the battle was completed to not continue trying to attack and exit the otherwise infinite loop
             if(isBattleCompleted()){
