@@ -151,7 +151,7 @@ transform: rotateY(180deg);
     justify-content: flex-end;
 }
 .battleCard {
-    width: 35%;
+    width: 30%;
     margin: 2%;
     height: 35%;
 }
@@ -165,4 +165,20 @@ th, td {
 table {
     width: 65%;
     margin: 0 auto;
+}
+.animations {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    display:none; /* TO BE CHANGED WITH JS */
+    justify-content: space-between;
+}
+#myTeamAnimations {
+    justify-content: flex-start;
+}
+#enemyTeamAnimations {
+    justify-content: flex-end;
+}
+.animations img {
+    width: 20%;
 }

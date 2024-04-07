@@ -72,6 +72,11 @@ const changeHp = (agent, damage) => {
         img.style.transition = '2s'
         img.style.filter = 'opacity(0.25)'
 
+        // Same for the gif
+        let gif = document.getElementById(`${agent}-gif`)
+        gif.style.transition = '2s'
+        gif.style.filter = 'opacity(0)'
+
         // Changing the data on local storage
         let myTeam = JSON.parse(localStorage.getItem('aliveOnMyTeam'))
         let enemyTeam = JSON.parse(localStorage.getItem('aliveOnEnemyTeam'))
@@ -166,10 +171,33 @@ const selectMap = () => {
     mapContainer.style.backgroundSize = 'cover'
 }
 
+// Sets all the animations to be visible on the battlefield and assigns them an ID based on each team's agents
+const startUpGifs = () => {
+    const gifsContainer = document.querySelectorAll('.animations')
+    for(let i=0; i<gifsContainer.length; i++){
+        gifsContainer[i].style.display = 'flex'
+    }
+    const soldierGifs = document.querySelectorAll('.soldier')
+    const allAgents = getAllAliveAgents().map(agent => agent[0])
+    for(let i=0; i<soldierGifs.length; i++){
+        soldierGifs[i].id = `${allAgents[i]}-gif`
+    }
+}
+
+const stopAnimations = () => {
+    const soldierGifs = document.querySelectorAll('.soldier')
+    for(let i=0; i<soldierGifs.length; i++){
+        soldierGifs[i].src = './assets/images/animations/stillGunner.gif'
+    }
+}
+
 const executeBattle = async() => {
     // Adding the map to the background
     selectMap()
     
+    // Setting up the animations
+    startUpGifs()
+
     // Starting the battle on a loop that will break whenever a team has no more agents alive
     while(true){
         let arrayOfAliveAgents = getAllAliveAgents()
@@ -187,6 +215,7 @@ const executeBattle = async() => {
 
             // I check if the battle was completed to not continue trying to attack and exit the otherwise infinite loop
             if(isBattleCompleted()){
+                stopAnimations()
                 return
             }
         }

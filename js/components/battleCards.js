@@ -30,7 +30,7 @@ const createBattleCard = (obj) => {
     agentImg.src = img
     agentImg.style.aspectRatio = '4/3'
     agentImg.style.objectFit = 'contain'
-    agentImg.style.width = '100%'
+    agentImg.style.width = '80%'
     agentImg.id = `${obj.agentId}-img`
 
     // HP bar creation
