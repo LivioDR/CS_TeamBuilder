@@ -128,11 +128,11 @@ The button on the top left corner is changed then to [Display my team](#team-ove
 ---
 #### Battle Simulator
 
-After clicking the *Start the battle* button, the battle simulator screen is shown.
+After clicking the *Start the battle* button, the battle simulator screen is shown. If the music was playing, the background music will change to a battle team. If it wasn't playing before, the player can still turn it on with the speaker icon on the top left corner.
 
 ![battle simulator screen](./assets/images/readme/battleSim.png)
 
-Here both teams are faced agains each other. Their names are being shown on the top of the screen, while the battle cards are displayed inside a container that will have a **background set randomly** amongst the available game maps.
+Here both teams are faced against each other. Their names are being shown on the top of the screen, while the battle cards are displayed inside a container that will have a **background set randomly** amongst the [available game maps](#annex-b---available-maps).
 
 Beneath the character cards there are four animated soldiers on each side, representing these characters. Whenever one of the agents falls in battle, the animated soldier linked to that character will fade away. The character's avatar will also fade out partially to show that the agent is down.
 
