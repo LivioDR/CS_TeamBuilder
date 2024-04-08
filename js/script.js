@@ -305,6 +305,8 @@ const setUpBattleSimulator = async() => {
     executeBattle()
 
 }
+
+// Adding the event listener to the "Start the battle" buttons on the team display screen
 const startBattleButtons = document.querySelectorAll('.startBattleBtn')
 for(let i=0; i<startBattleButtons.length; i++){
     startBattleButtons[i].addEventListener('click',setUpBattleSimulator)
