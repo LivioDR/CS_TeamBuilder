@@ -1,3 +1,5 @@
+// This object will hold the values for every type of weapon based on the rarity of the selected skin, to keep prices between the requirements of this project
+// Whenever a price for a weapon is needed, this object will be called by using the weapon type and its rarity as keys to access the price value
 const weaponPricing = {
     Pistols: {
         rarity_common_weapon: 200,
@@ -32,10 +34,10 @@ const weaponPricing = {
         rarity_ancient_weapon: 4500,
     },
     Knives: {
-        rarity_ancient_weapon: Math.round((Math.random()*8 + 2))*50, // defined on getSkinByTeamGroupedByCategoryAndWeapon(team) to use a different seed every time
+        rarity_ancient_weapon: Math.round((Math.random()*8 + 2))*50, // this formula was defined again on getSkinByTeamGroupedByCategoryAndWeapon(team) to use a different seed every time
     },
     Gloves: {
-        rarity_ancient: Math.round((Math.random()*8 + 2))*50, // defined on getSkinByTeamGroupedByCategoryAndWeapon(team) to use a different seed every time
+        rarity_ancient: Math.round((Math.random()*8 + 2))*50, // this formula was defined again on getSkinByTeamGroupedByCategoryAndWeapon(team) to use a different seed every time
     },
     null: {
         rarity_legendary_weapon: 0,
