@@ -136,7 +136,7 @@ const selectWeaponScreen = async() => {
     
         // Retrieving the category buttons and adding them to the HTML
         const categoryButtons = getWeponCategoryButtons(weaponsForMyTeam)
-        document.getElementById('categoryDiv').innerHTML = categoryButtons[1]
+        document.getElementById('categoryDiv').innerHTML = categoryButtons
     
         // Adding an event listener to the category buttons
         const allCategoryButtons = document.getElementsByTagName('button')
