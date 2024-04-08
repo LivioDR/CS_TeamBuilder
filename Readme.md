@@ -105,6 +105,19 @@ If the team name is not valid, a label will be displayed explaining the error, a
 ---
 #### Team Overview
 
+A team consists of four agents on each side, so three more agents are created to join the player's team.
+
+The name of the agents are set to the language in which the player's browser is set to simulate that they are other players joining the same server.
+
+![My team display](./assets/images/readme/myTeam.png)
+
+Again on hover the detailed information of every weapon is shown. Additionally, every character will display to the right of their name the remaining balance after purchasing their equipment.
+
+On the top of the page the team name can be seen, followed by two buttons: *Display enemy team* and *Start the battle*. The first button will flip the screen to [display the enemy team](#enemy-team-overview), while the second button will take the player to the [battle simulation](#battle-simulator).
+
+---
+#### Enemy Team Overview
+
 ---
 #### Annex A - Cheat codes
 | Cheat code | Description |
