@@ -3,13 +3,13 @@
 ### Livio Reinoso - ID 1165606
 ---
 ### Table of contents
-1. [Start Screen](#start)
+1. [Start Screen](#Start-screen)
 2. [Team Selection Screen](#selectTeam)
 3. [Character Selection](#selectAgent)
-4. [Weapon Selection](#selectWeapon)
+4. [Weapon Selection](#Weapon-Selection-screen)
 10. [Annex A - Cheat Codes](#annexA)
 ---
-#### Start screen {#start}
+#### Start screen
 
 After starting the application the following screen is being shown:
 
@@ -48,13 +48,13 @@ Whenever one of these validation rules is broken, a label will be displayed expl
 
 ![Character validation error](./assets/images/readme/SelectAgentError.png)
 
-On top of that, the player can enter different cheat codes on this screen. All of these are detailed on the table on [Annex A](#annexA).
+On top of that, the player can enter different cheat codes on this screen. All of these are detailed on the table on [Annex A](#annex-A---cheat-codes).
 
 ---
-#### Weapon Selection screen {#selectWeapon}
+#### Weapon Selection screen
 
 ---
-#### Annex A - Cheat codes {#annexA}
+#### Annex A - Cheat codes
 | Cheat code | Description |
 | ----------- | ----------- |
 | umbra witch | Changes the character avatar to Bayonetta |
