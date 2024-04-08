@@ -173,6 +173,9 @@ table {
     display:none; /* TO BE CHANGED WITH JS */
     justify-content: space-between;
 }
+.rival {
+    rotate: y 180deg;
+}
 #myTeamAnimations {
     justify-content: flex-start;
 }
