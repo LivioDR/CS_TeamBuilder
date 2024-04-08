@@ -75,7 +75,7 @@ This process should be repeated for every available category. After picking a we
 
 Once all six category weapons were selected (and after verifying that the player hasn't gone over balance) a *Confirm equipment* button will appear at the bottom of the screen.
 
-If at any point the balance of all the selected weapons goes over what was allowed for the player ($9000 by default), the button will disappear and only reappear whenever this condition is met again.
+If at any point the balance of all the selected weapons goes over what was allowed for the player (**$9000** by default, or a [customized money amount](#annex-a---cheat-codes)), the button will disappear and only reappear whenever this condition is met again.
 
 ![Confirm equipment button](./assets/images/readme/payloadDisplay.png)
 
@@ -85,6 +85,25 @@ Additionally, if the user hovers over any of the selected weapons on the contain
 
 ---
 #### Character Overview screen
+
+On this screen the player will be able to see the selected character (either one from the list of the selected team, or a [custom avatar](#annex-a---cheat-codes)).
+
+![Custom avatar](./assets/images/readme/customAvatar.png)
+
+The character name and the remaining balance are displayed on top of the screen, while the middle of the screen is split in two parts: the left side will display the character avatar, and the right side will display the selected equipment.
+
+On hover the equipment information is shown here too, with more detail than in the previous screen, again by using the HTML title attribute.
+
+The bottom part of the screen is reserved for the input element where the user is supposed to enter the name for their team. 
+
+![Team name validation](./assets/images/readme/teamName.png)
+
+A validation function will take care of checking that the entered name consists of a single word composed entirely of alphabetical characters, without any numbers or symbols.
+
+If the team name is not valid, a label will be displayed explaining the error, and the *Create Team* button will be disabled until the error is fixed.
+
+---
+#### Team Overview
 
 ---
 #### Annex A - Cheat codes
