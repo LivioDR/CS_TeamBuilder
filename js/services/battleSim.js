@@ -124,7 +124,7 @@ const selectTarget = (attacker) => {
     }
 }
 
-// Gets the full list of alive agents and returns it as an array to be used for the getTurnOrder function
+// Gets the full list of alive agents and returns it as an array containing their IDs and speed stat to be used for the getTurnOrder function
 const getAllAliveAgents = () => {
     let myTeam = JSON.parse(localStorage.getItem('aliveOnMyTeam'))
     let enemyTeam = JSON.parse(localStorage.getItem('aliveOnEnemyTeam'))
@@ -143,7 +143,7 @@ const getAllAliveAgents = () => {
     return arrayToReturn
 }
 
-// Checks if the battle has been completed and plays a sound effect
+// Checks if the battle has been completed and plays a sound effect if so, based on the winning team
 const isBattleCompleted = () => {
     let myTeam = JSON.parse(localStorage.getItem('aliveOnMyTeam'))
     let enemyTeam = JSON.parse(localStorage.getItem('aliveOnEnemyTeam'))
@@ -164,14 +164,14 @@ const isBattleCompleted = () => {
     }
 }
 
-// Select a random map from the list of available maps
+// Select a random map from the list of available maps and sets it as a background for the battle simulator screen
 const selectMap = () => {
     const mapContainer = document.getElementById('teamsContainer')
     mapContainer.style.backgroundImage = `url(${MAPS_ARRAY[Math.floor(Math.random() * MAPS_ARRAY.length)]}`
     mapContainer.style.backgroundSize = 'cover'
 }
 
-// Sets all the animations to be visible on the battlefield and assigns them an ID based on each team's agents
+// Sets all the animations to be visible on the battlefield and assigns them an ID based on each team's agents to link them to every agent, so we can make the animations disappear or stop on demand by using the agent's ID
 const startUpGifs = () => {
     const gifsContainer = document.querySelectorAll('.animations')
     for(let i=0; i<gifsContainer.length; i++){
@@ -184,6 +184,7 @@ const startUpGifs = () => {
     }
 }
 
+// After the batle is completed I'm changing the shooting soldier GIFs to an static image of them standing since the battle is now over
 const stopAnimations = () => {
     const soldierGifs = document.querySelectorAll('.soldier')
     for(let i=0; i<soldierGifs.length; i++){
@@ -191,6 +192,7 @@ const stopAnimations = () => {
     }
 }
 
+// This is the main function that will set up the map and the soldier GIFs and after that will go through a loop of turns that will contain all the attacks, breaking out of the loop only after all the agents on a team have their HP = 0
 const executeBattle = async() => {
     // Adding the map to the background
     selectMap()
@@ -200,12 +202,14 @@ const executeBattle = async() => {
 
     // Starting the battle on a loop that will break whenever a team has no more agents alive
     while(true){
+        // I get all the agents that are still alive for the turn
         let arrayOfAliveAgents = getAllAliveAgents()
+        // Then I get the turn order
         let turnOrder = getTurnOrder(arrayOfAliveAgents)
         for(let i=0; i<turnOrder.length; i++){
             // Handling the attacks on each turn
-            let target = selectTarget(turnOrder[i])
-            attack(turnOrder[i],target)
+            let target = selectTarget(turnOrder[i]) // Selecting the target for the agent whose turn is to attack
+            attack(turnOrder[i],target) // executing the attack from the attacker agent to the defender agent
 
             // Setting a timeout to get to see the attacks for each turn
             const timer = (ms) => {
@@ -215,7 +219,9 @@ const executeBattle = async() => {
 
             // I check if the battle was completed to not continue trying to attack and exit the otherwise infinite loop
             if(isBattleCompleted()){
+                // If the battle was indeed completed, I stop the winning team animations
                 stopAnimations()
+                // Then at last, I exit the infinite loop and this function
                 return
             }
         }
