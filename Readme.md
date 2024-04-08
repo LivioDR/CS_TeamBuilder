@@ -4,10 +4,10 @@
 ---
 ### Table of contents
 1. [Start Screen](#Start-screen)
-2. [Team Selection Screen](#selectTeam)
-3. [Character Selection](#selectAgent)
+2. [Team Selection Screen](#select-team-screen)
+3. [Character Selection](#select-agent-screen)
 4. [Weapon Selection](#Weapon-Selection-screen)
-10. [Annex A - Cheat Codes](#annexA)
+10. [Annex A - Cheat Codes](#annex-a---cheat-codes)
 ---
 #### Start screen
 
@@ -20,7 +20,7 @@ Notice that there is a speaker icon in the upper left corner. By clicking on it 
 By clicking on the start button the application will move forward to the "Select team" screen.
 
 ---
-#### Select Team screen {#selectTeam}
+#### Select Team screen
 
 ![Team Selection Screen](./assets/images/readme/SelectTeam.png)
 
@@ -29,7 +29,7 @@ Here you are able to select which to play as: **Terrorists** of **Counter-Terror
 If you're not sure which team to pick, or want the application to pick a random team, you can click on the **Auto select button** and a team will be assigned to you with a 50% chance of being one or the other.
 
 ---
-#### Select Agent screen {#selectAgent}
+#### Select Agent screen
 
 ![Character Selection](./assets/images/readme/SelectAgent.png)
 
