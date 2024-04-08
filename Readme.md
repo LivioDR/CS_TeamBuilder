@@ -7,7 +7,11 @@
 2. [Team Selection Screen](#select-team-screen)
 3. [Character Selection](#select-agent-screen)
 4. [Weapon Selection](#Weapon-Selection-screen)
-10. [Annex A - Cheat Codes](#annex-a---cheat-codes)
+5. [Character Overview](#character-overview-screen)
+6. [Team Overview](#team-overview)
+7. [Enemy Team Overview](#enemy-team-overview)
+8. [Battle Simulator](#battle-simulator)
+9. [Annex A - Cheat Codes](#annex-a---cheat-codes)
 ---
 #### Start screen
 
@@ -52,6 +56,35 @@ On top of that, the player can enter different cheat codes on this screen. All o
 
 ---
 #### Weapon Selection screen
+
+On this screen the user should select the different weapons for their equipment.
+
+First, a category must be selected by clicking on a button from the leftmost button list. 
+
+![Category Selection](./assets/images/readme/categorySelection.png)
+
+After a category is selected, the type of weapons available for that category will be displayed on a new button list
+
+![Type of weapon selection](./assets/images/readme/weaponSelection.png)
+
+Then after picking a type of weapon, all the available skins along with their name, image and price will be displayed on the rightmost container, allowing the user to select any skin that they like.
+
+![Skin selection](./assets/images/readme/skinSelection.png)
+
+This process should be repeated for every available category. After picking a weapon and skin for each category, these will be displayed beneath the category button list.
+
+Once all six category weapons were selected (and after verifying that the player hasn't gone over balance) a *Confirm equipment* button will appear at the bottom of the screen.
+
+If at any point the balance of all the selected weapons goes over what was allowed for the player ($9000 by default), the button will disappear and only reappear whenever this condition is met again.
+
+![Confirm equipment button](./assets/images/readme/payloadDisplay.png)
+
+Additionally, if the user hovers over any of the selected weapons on the container that shows their equipment the name of this weapon, the skin name and the price will be display by using the HTML title attribute.
+
+![Display name and price on hover](./assets/images/readme/payloadDisplayHover.png)
+
+---
+#### Character Overview screen
 
 ---
 #### Annex A - Cheat codes
