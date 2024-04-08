@@ -12,6 +12,7 @@
 7. [Enemy Team Overview](#enemy-team-overview)
 8. [Battle Simulator](#battle-simulator)
 9. [Annex A - Cheat Codes](#annex-a---cheat-codes)
+10. [Annex B - Available Maps](#Annex-B---Available-Maps)
 ---
 #### Start screen
 
@@ -105,9 +106,9 @@ If the team name is not valid, a label will be displayed explaining the error, a
 ---
 #### Team Overview
 
-A team consists of four agents on each side, so three more agents are created to join the player's team.
+A team consists of four agents on each side, so three more agents are created to join the player's team, all of them with the same money constraints as the player's character.
 
-The name of the agents are set to the language in which the player's browser is set to simulate that they are other players joining the same server.
+The name of the agents are set to the language in which the player's browser is set to simulate that they are other players joining the same server. If the browser language is not supported by the API, it will default to US English.
 
 ![My team display](./assets/images/readme/myTeam.png)
 
@@ -117,6 +118,27 @@ On the top of the page the team name can be seen, followed by two buttons: *Disp
 
 ---
 #### Enemy Team Overview
+
+This screen is the same as the previous one, only now displaying the enemy team instead of the player's team, which was created with the same criteria and limitations in mind.
+
+![Enemy team display](./assets/images/readme/rivalTeam.png)
+
+The button on the top left corner is changed then to [Display my team](#team-overview), allowing the player go back and forth between both team display screens. The button on the top right corner will still start the [battle simulator](#battle-simulator)
+
+---
+#### Battle Simulator
+
+After clicking the *Start the battle* button, the battle simulator screen is shown.
+
+![battle simulator screen](./assets/images/readme/battleSim.png)
+
+Here both teams are faced agains each other. Their names are being shown on the top of the screen, while the battle cards are displayed inside a container that will have a **background set randomly** amongst the available game maps.
+
+Beneath the character cards there are four animated soldiers on each side, representing these characters. Whenever one of the agents falls in battle, the animated soldier linked to that character will fade away. The character's avatar will also fade out partially to show that the agent is down.
+
+While taking damage, the health bars of each character will reduce. Whenever the remaining health of any of them gets to zero, it is considered that such agent is down.
+
+After all the agents on a team are down the battle will be over and the animated soldiers will stop shooting.
 
 ---
 #### Annex A - Cheat codes
@@ -155,3 +177,13 @@ On the top of the page the team name can be seen, followed by two buttons: *Disp
 | povertyfinance | Divides the available money by 2 |
 | defaultpayload | Sets a default payload for the character to speed up testing |
 | iwannaplay4real | Opens a playable web version of Counter-Strike on a new tab |
+
+---
+#### Annex B - Available Maps
+
+- cs_assault
+- cs_italy
+- cs_poolday
+- de_aztec
+- de_dust
+- de_inferno
