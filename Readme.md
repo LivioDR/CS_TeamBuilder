@@ -29,16 +29,16 @@ By clicking on the start button the application will move forward to the "Select
 
 ![Team Selection Screen](./assets/images/readme/SelectTeam.png)
 
-Here you are able to select which to play as: **Terrorists** of **Counter-Terrorists**.
+Here you are able to select which team to play as: **Terrorists** of **Counter-Terrorists**.
 
-If you're not sure which team to pick, or want the application to pick a random team, you can click on the **Auto select button** and a team will be assigned to you with a 50% chance of being one or the other.
+If you're not sure which team to pick, or want the application to pick a random team for you, you can click on the **Auto select button** and a team will be assigned to you with a 50% chance of being one or the other.
 
 ---
 #### Select Agent screen
 
 ![Character Selection](./assets/images/readme/SelectAgent.png)
 
-On this third screen the user can select which agent will be using on this Counter Strike match.
+On this third screen the user can select which agent will be using on this Counter-Strike match.
 
 The list of agents is composed only of characters from the team selected on the previous screen.
 
