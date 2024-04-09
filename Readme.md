@@ -123,12 +123,12 @@ This screen is the same as the previous one, only now displaying the enemy team 
 
 ![Enemy team display](./assets/images/readme/rivalTeam.png)
 
-The button on the top left corner is changed then to [Display my team](#team-overview), allowing the player go back and forth between both team display screens. The button on the top right corner will still start the [battle simulator](#battle-simulator)
+The button on the top left corner is changed then to [Display my team](#team-overview), allowing the player go back and forth between both team display screens. The button on the top right corner will still start the [battle simulator](#battle-simulator).
 
 ---
 #### Battle Simulator
 
-After clicking the *Start the battle* button, the battle simulator screen is shown. If the music was playing, the background music will change to a battle team. If it wasn't playing before, the player can still turn it on with the speaker icon on the top left corner.
+After clicking the *Start the battle* button, the battle simulator screen is shown. If the music was playing, the background music will change to a battle theme. If it wasn't playing before, the player can still turn it on with the speaker icon on the top left corner.
 
 ![battle simulator screen](./assets/images/readme/battleSim.png)
 
@@ -159,7 +159,7 @@ After all the agents on a team are down the battle will be over and the animated
 | animal crossing | Changes the character avatar to Isabelle |
 | metal gear | Changes the character avatar to Solid Snake |
 | sonic speed | Changes the character avatar to Sonic |
-|dark force | Changes the character avatar to Darth Vader |
+| dark force | Changes the character avatar to Darth Vader |
 | thisistheway | Changes the character avatar to The Mandalorian |
 | lh44blessed | Changes the character avatar to Lewis Hamilton |
 | fairy tale | Changes the character avatar to Red Riding Hood |
