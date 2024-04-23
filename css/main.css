@@ -122,17 +122,19 @@ transform: rotateY(180deg);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    height: 0px; /* this value will be overriden in the JS code later */
 } 
 #teamsContainer {
     display: flex;
     justify-content: space-between;
     flex-direction: row;
     border-radius: 50px;
-    padding: 5%;
+    padding: 0%;
     max-height: 70vh;
     margin-top: 30px;
     width: 85%;
     margin-inline: auto;
+    height: 0%;
 }
 #teamBattleNames{
     display: flex;

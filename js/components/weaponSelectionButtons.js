@@ -69,7 +69,7 @@ const getSkinTypeButtonsByWeapon = (obj, weaponName) => {
     const skinsArray = obj[category][weaponName]
     // Once I get the array with the information for all the skins that are available, I create a card for each one of them
     let skinCards = skinsArray.map(element => {
-        return `<div id='${element.id}' style="width: 28%; align-text: center; background-color: grey; margin: 2%; aspect-ratio: 1;">
+        return `<div id='${element.id}' style="width: 28%; align-text: center; background-color: grey; margin: 2%; aspect-ratio: 1; height: fit-content;">
                     <img src='${element.image}' style="width: 100%; margin: 0%; padding: 0%;">
                     <button class="skinButton" id='${element.id}-button' onclick="localStorage.setItem('selectedSkin-${category}','${element.id}');" style="margin-bottom: 0%;">
                         <div style="display: flex; flex-direction: row; flex-wrap: wrap;justify-content: space-between;">

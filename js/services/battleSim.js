@@ -167,6 +167,13 @@ const isBattleCompleted = () => {
 // Select a random map from the list of available maps and sets it as a background for the battle simulator screen
 const selectMap = () => {
     const mapContainer = document.getElementById('teamsContainer')
+    
+    // Changing the styling to adjust the battle simulator map to the browser page
+    mapContainer.style.height = 'auto'
+    mapContainer.style.padding = '5%'
+    mapContainer.style.marginTop = '30px'
+
+    // Setting the map
     mapContainer.style.backgroundImage = `url(${MAPS_ARRAY[Math.floor(Math.random() * MAPS_ARRAY.length)]}`
     mapContainer.style.backgroundSize = 'cover'
 }
