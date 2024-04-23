@@ -13,6 +13,7 @@
 8. [Battle Simulator](#battle-simulator)
 9. [Annex A - Cheat Codes](#annex-a---cheat-codes)
 10. [Annex B - Available Maps](#Annex-B---Available-Maps)
+11. [Deployment Status](#Deployment-Status)
 ---
 #### Start screen
 
@@ -187,3 +188,7 @@ After all the agents on a team are down the battle will be over and the animated
 - de_aztec
 - de_dust
 - de_inferno
+
+---
+#### Deployment Status
+[![Netlify Status](https://api.netlify.com/api/v1/badges/a30c13f0-0c1d-46af-896d-9f00b901bb75/deploy-status?branch=main)](https://app.netlify.com/sites/csteambuilder/deploys)
