@@ -1,16 +1,13 @@
+import { API_ENDPOINTS } from "../config/endpoints.js"
 import weaponPricing from "../utilities/weaponPricing.js"
-/* Available languages */
-// bg cs da de el en es-ES es-MX fi fr hu it ja ko nl no pl pt-BR pt-PT ro ru sv th tr uk zh-CN zh-TW vi
-const language = 'en'
-const baseUrl = `https://bymykel.github.io/CSGO-API/api/${language}`
 
 // Returns an object organized by {category: weaponType : [...skins]} for the skins that are valid for the team passed as an argument (being that team weapons and weapons that are available for both teams)
 const getSkinByTeamGroupedByCategoryAndWeapon = async(team) => {
     try{
         // getting all the skins from the CS-GO API
-        let result = await fetch(`${baseUrl}/skins.json`).then(res => res.json())
+        let result = await fetch(API_ENDPOINTS.SKINS).then(res => res.json())
         // then I filter out the skins that are not available for the team received as an argument
-        let filteredResult = result.filter(item => (item.team.id === team || item.team.id === 'both'))
+        let filteredResult = result.filter(item => ((item.team.id === team || item.team.id === 'both') && item.category.name !== 'Equipment'))
         // I create an empty object that will store the new data structure with the skins information
         let summarizedDataByWeapon = {}
 

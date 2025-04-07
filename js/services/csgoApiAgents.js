@@ -1,12 +1,9 @@
-/* Available languages */
-// bg cs da de el en es-ES es-MX fi fr hu it ja ko nl no pl pt-BR pt-PT ro ru sv th tr uk zh-CN zh-TW vi
-const language = 'en' // I'm setting the language by default to english for the API
-const baseUrl = `https://bymykel.github.io/CSGO-API/api/${language}`
+import { API_ENDPOINTS } from "../config/endpoints.js"
 
 // A function to retrieve all the agents and their data from the CS-GO API
 const getAllAgents = async() => {
     try{
-        let result = await fetch(`${baseUrl}/agents.json`).then(res => res.json())
+        let result = await fetch(API_ENDPOINTS.AGENTS).then(res => res.json())
         return result
     }
     catch(e){
@@ -17,7 +14,7 @@ const getAllAgents = async() => {
 // This function will return only the agents and their data that match the team passed as an argument
 const getAgentsByTeam = async(team) => {
     try{
-        let result = await fetch(`${baseUrl}/agents.json`).then(res => res.json())
+        let result = await fetch(API_ENDPOINTS.AGENTS).then(res => res.json())
         let filteredResult = result.filter(agent => agent.team.id == team)
         return filteredResult
     }
