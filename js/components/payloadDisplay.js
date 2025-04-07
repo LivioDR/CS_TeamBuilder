@@ -69,7 +69,7 @@ const getPayloadCards = () => {
     }
     // Once the container has been populated with all the selected weapons & empty spaces, I add it to beneath the category buttons
     const currentEquipmentDiv = document.getElementById('categoryDiv')
-    if(currentEquipmentDiv.lastChild && currentEquipmentDiv.lastChild.textContent.trim() !== 'Gloves'){ // I check if there was already a previous container appended to remove it
+    if(currentEquipmentDiv.lastChild && !['Gloves', 'Heavy', 'Pistols', 'Rifles', 'Knives', 'SMGs'].includes(currentEquipmentDiv.lastChild.textContent.trim())){ // I check if there was already a previous container appended to remove it
         currentEquipmentDiv.lastChild.remove()
     }
     currentEquipmentDiv.appendChild(payloadCardsDiv)

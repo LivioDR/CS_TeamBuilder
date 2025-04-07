@@ -46,12 +46,12 @@ const moneyCheats = {
 // Once entered, the user will still need to select at least one category, weapon, and skin for the validation function to be triggered and load the rest of the skins
 const devHelps = {
     'defaultpayload' : {
-        "selectedSkin-Pistols": "skin-132116",
-        "selectedSkin-Rifles": "skin-590028",
-        "selectedSkin-Heavy": "skin-1638780",
-        "selectedSkin-SMGs": "skin-1245808",
-        "selectedSkin-Knives": "skin-32768152",
-        "selectedSkin-Gloves": "skin-329686228"
+        "selectedSkin-Pistols": "skin-6747a1a6fb43",
+        "selectedSkin-Rifles": "skin-584e1dbd3391",
+        "selectedSkin-Heavy": "skin-69c57b0e17a5",
+        "selectedSkin-SMGs": "skin-a0695188a122",
+        "selectedSkin-Knives": "skin-0786fd21a508",
+        "selectedSkin-Gloves": "skin-a4133c8cedcb"
     },
 }
 

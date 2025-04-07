@@ -97,8 +97,11 @@ const getFullEquipmentFromLocalStorage = () => {
     // Retrieves all the categories dynamically from the local storage
     const weaponsObject = JSON.parse(localStorage.getItem('weaponObject'))
     const categories = Object.keys(weaponsObject)
-    // Gets rid of the category named 'null' on the API
-    categories.splice(categories.indexOf('null'),1)
+
+    // This line was used to get rid of the category named 'null' on the API
+    // categories.splice(categories.indexOf('null'),1)
+    // Commented out because it was patched in the latest version of the API
+    
     for(let i=0; i<categories.length; i++){
         // then for every other category I retrieve the selected skin
         const localStorageString = `selectedSkin-${categories[i]}`

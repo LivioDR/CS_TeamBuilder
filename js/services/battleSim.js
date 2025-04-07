@@ -10,7 +10,7 @@ import playSfx from "./soundEffects.js"
 const getAgentStats = (agentObject) => {
     const agentId = agentObject.agentId.split("-")[1]
     const [hp, speed] = [Math.round(Number(agentId)*((Math.random()*0.5)+1)), 100 + Number(agentId)%100]
-    let weaponArray = agentObject.weaponsArray.map(skinId => Number(skinId.split("-")[1]))
+    let weaponArray = agentObject.weaponsArray.map(skinId => Number("0x" + skinId.split("-")[1]))
     
     // I check for NaN values since there are a small number of skin IDs that do not include numbers (i.e. 'skin-butterfly-knife' instead of 'skin-123456')
     for(let i=0; i<weaponArray.length; i++){
